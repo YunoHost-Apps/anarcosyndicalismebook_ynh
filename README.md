@@ -77,11 +77,11 @@ sudo yunohost app upgrade anarchosyndicalismebook -u https://gitlab.com/anarchym
 **Plus d'infos sur le packaging d'applications :** <https://yunohost.org/packaging_apps>
 ## Première connexion
 
-L'installation est entièrement automatique.
+L'installation est entièrement automatique. Un compte administrateur est créé automatiquement.
 
 Après l'installation, vous pouvez vous connecter à l'interface d'administration avec :
-- **Email** : L'adresse email de l'administrateur YunoHost choisi lors de l'installation.
-- **Mot de passe** : Le mot de passe administrateur choisi lors de l'installation.
+- **Email** : L'adresse email associée au compte administrateur YunoHost que vous avez choisi lors de l'installation (par exemple : `admin@votre-domaine.tld`).
+- **Mot de passe** : Le mot de passe administrateur que vous avez défini lors de l'installation (champ "admin_password").
 
 ## Configuration hCaptcha
 
