@@ -96,6 +96,13 @@ if [ -z "${contact_email:-}" ]; then
     contact_email="$admin_email"
 fi
 
+# Prepare SMTP From address
+if [ -n "$smtp_user" ]; then
+    smtp_from="$smtp_user"
+else
+    smtp_from="$admin_email"
+fi
+
 # Create includes directory
 mkdir -p "$install_dir/includes"
 
