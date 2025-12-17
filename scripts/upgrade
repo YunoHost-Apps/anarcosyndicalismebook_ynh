@@ -105,7 +105,7 @@ if [[ -z "$admin_email" ]]; then
      # Fallback to system mail
      admin_email="root@$domain"
 fi
-current_date=$(date +"%Y-%m-%d %H:%M:%S")
+date=$(date +"%Y-%m-%d %H:%M:%S")
 
 # Create includes directory
 mkdir -p "$install_dir/includes"
@@ -119,7 +119,7 @@ ynh_replace_string "__ADMIN_EMAIL__" "$admin_email" "$install_dir/includes/confi
 ynh_replace_string "__DOMAIN__" "$domain" "$install_dir/includes/config.php"
 clean_path=${path%/}
 ynh_replace_string "__PATH__" "$clean_path" "$install_dir/includes/config.php"
-ynh_replace_string "__DATE__" "$current_date" "$install_dir/includes/config.php"
+# __DATE__ is handled by ynh_config_add because $date is defined
 
 # DEBUG: Check if files exist and are not empty
 ynh_print_info "DEBUG: Listing includes directory:"

@@ -73,7 +73,7 @@ db_pwd=$(ynh_app_setting_get --key=mysql_pwd)
 
 # Retrieve admin email early for config
 admin_email=$(ynh_user_get_info --username="$admin" --key="mail")
-current_date=$(date +"%Y-%m-%d %H:%M:%S")
+date=$(date +"%Y-%m-%d %H:%M:%S")
 
 # Create includes directory
 mkdir -p "$install_dir/includes"
@@ -92,7 +92,7 @@ ynh_replace_string "__DOMAIN__" "$domain" "$install_dir/includes/config.php"
 # Actually $path in YunoHost is usually / or /foo/.
 clean_path=${path%/}
 ynh_replace_string "__PATH__" "$clean_path" "$install_dir/includes/config.php"
-ynh_replace_string "__DATE__" "$current_date" "$install_dir/includes/config.php"
+# __DATE__ is handled by ynh_config_add because $date is defined
 
 chmod 644 "$install_dir/includes/config.php"
 chown "$app:$app" "$install_dir/includes/config.php"
