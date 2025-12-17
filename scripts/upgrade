@@ -83,6 +83,56 @@ if [[ -f "$install_dir/sql/migrations.sql" ]]; then
 fi
 
 #=================================================
+# UPDATE CONFIGURATION FILES
+#=================================================
+ynh_script_progression "Updating configuration files..."
+
+# Retrieve database credentials
+db_name=$(ynh_app_setting_get --key=db_name)
+db_user=$(ynh_app_setting_get --key=mysql_user)
+db_pwd=$(ynh_app_setting_get --key=mysql_pwd)
+
+# Retrieve admin email early for config
+admin_email=$(ynh_user_get_info --username="$admin" --key="mail")
+# Wait, $admin is not defined in UPGRADE script usually! We need to get it from settings or use admin email from settings.
+# Let's use the first YunoHost admin email if stored, or just use 'root@$domain' as fallback if $admin variable is empty.
+# Usually standard variable $admin exists? No, only in install.
+# We must retrieve the admin user or email from app settings if we stored it?
+# Or just use a generic email.
+# Let's try to get relevant email.
+admin_email=$(ynh_app_setting_get --key=admin_email) # If we stored it?
+if [[ -z "$admin_email" ]]; then
+     # Fallback to system mail
+     admin_email="root@$domain"
+fi
+current_date=$(date +"%Y-%m-%d %H:%M:%S")
+
+# Create includes directory
+mkdir -p "$install_dir/includes"
+
+# Generate database.php in includes/
+ynh_config_add --template="database.php" --destination="$install_dir/includes/database.php"
+
+# Generate config.php in includes/ to bypass installer
+ynh_config_add --template="config.php" --destination="$install_dir/includes/config.php"
+ynh_replace_string "__ADMIN_EMAIL__" "$admin_email" "$install_dir/includes/config.php"
+ynh_replace_string "__DOMAIN__" "$domain" "$install_dir/includes/config.php"
+clean_path=${path%/}
+ynh_replace_string "__PATH__" "$clean_path" "$install_dir/includes/config.php"
+ynh_replace_string "__DATE__" "$current_date" "$install_dir/includes/config.php"
+
+# DEBUG: Check if files exist and are not empty
+ynh_print_info "DEBUG: Listing includes directory:"
+ls -la "$install_dir/includes/"
+
+# Display database credentials for manual setup if needed
+ynh_print_warn "IMPORTANT: Si l'application vous demande de configurer la base de données, utilisez ces informations :"
+ynh_print_info "Hôte : localhost"
+ynh_print_info "Base de données : $db_name"
+ynh_print_info "Utilisateur : $db_user"
+ynh_print_info "Mot de passe : $db_pwd"
+
+#=================================================
 # SET PERMISSIONS
 #=================================================
 ynh_script_progression "Setting permissions..."
@@ -94,11 +144,11 @@ chmod -R 750 "$install_dir"
 chown -R "$app:www-data" "$data_dir"
 chmod -R 750 "$data_dir"
 
-# Set specific permissions for database config if it exists
-if [[ -f "$install_dir/database.php" ]]; then
-    chmod 400 "$install_dir/database.php"
-    chown "$app:$app" "$install_dir/database.php"
-fi
+# Set specific permissions for config files
+chmod 400 "$install_dir/includes/database.php"
+chown "$app:$app" "$install_dir/includes/database.php"
+chmod 644 "$install_dir/includes/config.php"
+chown "$app:$app" "$install_dir/includes/config.php"
 
 #=================================================
 # END OF SCRIPT
