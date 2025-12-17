@@ -120,12 +120,24 @@ mkdir -p "$install_dir/includes"
 # Generate database.php in includes/
 ynh_config_add --template="database.php" --destination="$install_dir/includes/database.php"
 
+# Retrieve hCaptcha keys from old config if present
+old_hcaptcha_site_key=""
+old_hcaptcha_secret_key=""
+if [[ -f "$install_dir/includes/config.php" ]]; then
+    old_hcaptcha_site_key=$(grep "HCAPTCHA_SITE_KEY" "$install_dir/includes/config.php" | cut -d "'" -f 4)
+    old_hcaptcha_secret_key=$(grep "HCAPTCHA_SECRET_KEY" "$install_dir/includes/config.php" | cut -d "'" -f 4)
+fi
+
 # Generate config.php in includes/ to bypass installer
 ynh_config_add --template="config.php" --destination="$install_dir/includes/config.php"
 sed -i "s|__ADMIN_EMAIL__|$admin_email|g" "$install_dir/includes/config.php"
 sed -i "s|__DOMAIN__|$domain|g" "$install_dir/includes/config.php"
 clean_path=${path%/}
 sed -i "s|__PATH__|$clean_path|g" "$install_dir/includes/config.php"
+
+# Restore hCaptcha keys
+sed -i "s|__HCAPTCHA_SITE_KEY__|$old_hcaptcha_site_key|g" "$install_dir/includes/config.php"
+sed -i "s|__HCAPTCHA_SECRET_KEY__|$old_hcaptcha_secret_key|g" "$install_dir/includes/config.php"
 # __DATE__ is handled by ynh_config_add because $date is defined
 
 # DEBUG: Check if files exist and are not empty

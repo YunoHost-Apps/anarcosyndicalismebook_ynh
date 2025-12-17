@@ -75,3 +75,15 @@ sudo yunohost app upgrade anarchosyndicalismebook -u https://gitlab.com/anarchym
 ```
 
 **Plus d'infos sur le packaging d'applications :** <https://yunohost.org/packaging_apps>
+## Première connexion
+
+L'installation est entièrement automatique.
+
+Après l'installation, vous pouvez vous connecter à l'interface d'administration avec :
+- **Email** : L'adresse email de l'administrateur YunoHost choisi lors de l'installation.
+- **Mot de passe** : Le mot de passe administrateur choisi lors de l'installation.
+
+## Configuration hCaptcha
+
+Si vous souhaitez utiliser hCaptcha pour protéger votre site, vous pouvez renseigner les clés lors de l'installation. Sinon, laissez les champs vides.
+Pour obtenir des clés, inscrivez-vous sur [hCaptcha.com](https://www.hcaptcha.com/).

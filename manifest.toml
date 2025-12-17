@@ -46,6 +46,18 @@ ram.runtime = "128M"
     [install.admin_password]
     type = "password"
 
+    [install.hcaptcha_site_key]
+    type = "string"
+    description.en = "hCaptcha Site Key (optional)"
+    description.fr = "Clé du site hCaptcha (facultatif)"
+    optional = true
+
+    [install.hcaptcha_secret_key]
+    type = "string"
+    description.en = "hCaptcha Secret Key (optional)"
+    description.fr = "Clé secrète hCaptcha (facultatif)"
+    optional = true
+
 [resources]
     [resources.sources.main]
     url = "https://gitlab.com/anarchymedialibertaire-group/anarcosyndicalismebook/-/archive/main/anarcosyndicalismebook-main.tar.gz"

@@ -92,6 +92,13 @@ sed -i "s|__DOMAIN__|$domain|g" "$install_dir/includes/config.php"
 # Actually $path in YunoHost is usually / or /foo/.
 clean_path=${path%/}
 sed -i "s|__PATH__|$clean_path|g" "$install_dir/includes/config.php"
+
+# Replace hCaptcha keys (optional)
+# Ensure variables are set (defaults to empty if not provided)
+hcaptcha_site_key=${hcaptcha_site_key:-""}
+hcaptcha_secret_key=${hcaptcha_secret_key:-""}
+sed -i "s|__HCAPTCHA_SITE_KEY__|$hcaptcha_site_key|g" "$install_dir/includes/config.php"
+sed -i "s|__HCAPTCHA_SECRET_KEY__|$hcaptcha_secret_key|g" "$install_dir/includes/config.php"
 # __DATE__ is handled by ynh_config_add because $date is defined
 
 chmod 644 "$install_dir/includes/config.php"
