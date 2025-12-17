@@ -44,7 +44,7 @@ Conçu pour les collectifs, associations, syndicats souhaitant diffuser des text
 - Widget d'accessibilité complet
 - Partage social (Mastodon, Bluesky, Telegram, etc.)
 
-**Version incluse :** 1.0.0~ynh1
+**Version incluse :** 1.0.0~ynh5
 
 **Licence :** MIT
 
