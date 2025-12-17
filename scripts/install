@@ -66,6 +66,11 @@ ln -sf "$data_dir/backups" "$install_dir/backups"
 #=================================================
 ynh_script_progression "Adding app's configuration..."
 
+# Retrieve database credentials
+db_name=$(ynh_app_setting_get --key=db_name)
+db_user=$(ynh_app_setting_get --key=mysql_user)
+db_pwd=$(ynh_app_setting_get --key=mysql_pwd)
+
 ynh_config_add --template="database.php" --destination="$install_dir/database.php"
 
 chmod 400 "$install_dir/database.php"
