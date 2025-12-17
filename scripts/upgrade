@@ -15,7 +15,55 @@ ynh_script_progression "Upgrading source files..."
 old_version=$(ynh_app_setting_get --key=version)
 ynh_print_info "Upgrading from version: $old_version"
 
-ynh_setup_source --dest_dir="$install_dir" --keep="database.php"
+# Check if it's already a git repo
+if [ -d "$install_dir/.git" ]; then
+    ynh_print_info "Updating via git pull..."
+    pushd "$install_dir"
+    git pull origin main
+    popd
+else
+    ynh_print_info "Migrating to git installation..."
+    # Backup configuration files
+    cp "$install_dir/includes/database.php" "$TMP_DIR/database.php.backup"
+    cp "$install_dir/includes/config.php" "$TMP_DIR/config.php.backup"
+    
+    # Remove old files (except user data which should be in data_dir, but uploads are in install_dir/uploads usually?)
+    # Wait, uploads are usually symlinked. 
+    # Let's check _common.sh. If uploads are persistent, they are protected.
+    # But ynh_setup_source usually handles this.
+    # For safety, let's keep it simple: just overwrite files with git ? 
+    # No, git clone needs empty dir.
+    
+    # Cleaning directory but preserving uploads if they are inside
+    # Actually, let's trust that uploads are symlinked to /home/yunohost.apps/...
+    # But just in case, let's move uploads aside if they are real directories
+    if [ -d "$install_dir/uploads" ] && [ ! -L "$install_dir/uploads" ]; then
+         mv "$install_dir/uploads" "$TMP_DIR/uploads_backup"
+         restore_uploads=1
+    fi
+    
+    # Remove all content
+    rm -rf "$install_dir"/*
+    rm -rf "$install_dir"/.* 2>/dev/null
+    
+    # Clone
+    git clone "https://gitlab.com/anarchymedialibertaire-group/anarcosyndicalismebook.git" "$install_dir"
+    
+    # Restore config
+    mkdir -p "$install_dir/includes"
+    cp "$TMP_DIR/database.php.backup" "$install_dir/includes/database.php"
+    cp "$TMP_DIR/config.php.backup" "$install_dir/includes/config.php"
+    
+    # Restore uploads if needed
+    if [ "$restore_uploads" == "1" ]; then
+        rm -rf "$install_dir/uploads"
+        mv "$TMP_DIR/uploads_backup" "$install_dir/uploads"
+    fi
+    
+    # Fix permissions immediately
+    chown -R "$app:$app" "$install_dir"
+fi
+# ynh_setup_source --dest_dir="$install_dir" --keep="database.php" # Replaced by git logic
 
 #=================================================
 # UPGRADE COMPOSER DEPENDENCIES

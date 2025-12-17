@@ -11,7 +11,9 @@ check_php_version
 #=================================================
 ynh_script_progression "Setting up source files..."
 
-ynh_setup_source --dest_dir="$install_dir"
+# Clone git repository to have .git directory available
+git clone "https://gitlab.com/anarchymedialibertaire-group/anarcosyndicalismebook.git" "$install_dir"
+# ynh_setup_source --dest_dir="$install_dir" # Replaced by git clone
 
 #=================================================
 # INSTALL COMPOSER DEPENDENCIES
