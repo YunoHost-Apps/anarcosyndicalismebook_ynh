@@ -1,3 +1,4 @@
+<?php
 // Configuration générée le __DATE__
 define('SMTP_HOST', '__SMTP_HOST__');
 define('SMTP_PORT', __SMTP_PORT__);
