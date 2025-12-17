@@ -23,22 +23,18 @@ if [ -d "$install_dir/.git" ]; then
     popd
 else
     ynh_print_info "Migrating to git installation..."
+    
+    # Create temp dir
+    local tmp_dir=$(mktemp -d)
+    
     # Backup configuration files
-    cp "$install_dir/includes/database.php" "$TMP_DIR/database.php.backup"
-    cp "$install_dir/includes/config.php" "$TMP_DIR/config.php.backup"
+    cp "$install_dir/includes/database.php" "$tmp_dir/database.php.backup"
+    cp "$install_dir/includes/config.php" "$tmp_dir/config.php.backup"
     
     # Remove old files (except user data which should be in data_dir, but uploads are in install_dir/uploads usually?)
-    # Wait, uploads are usually symlinked. 
-    # Let's check _common.sh. If uploads are persistent, they are protected.
-    # But ynh_setup_source usually handles this.
-    # For safety, let's keep it simple: just overwrite files with git ? 
-    # No, git clone needs empty dir.
-    
     # Cleaning directory but preserving uploads if they are inside
-    # Actually, let's trust that uploads are symlinked to /home/yunohost.apps/...
-    # But just in case, let's move uploads aside if they are real directories
     if [ -d "$install_dir/uploads" ] && [ ! -L "$install_dir/uploads" ]; then
-         mv "$install_dir/uploads" "$TMP_DIR/uploads_backup"
+         mv "$install_dir/uploads" "$tmp_dir/uploads_backup"
          restore_uploads=1
     fi
     
@@ -51,17 +47,20 @@ else
     
     # Restore config
     mkdir -p "$install_dir/includes"
-    cp "$TMP_DIR/database.php.backup" "$install_dir/includes/database.php"
-    cp "$TMP_DIR/config.php.backup" "$install_dir/includes/config.php"
+    cp "$tmp_dir/database.php.backup" "$install_dir/includes/database.php"
+    cp "$tmp_dir/config.php.backup" "$install_dir/includes/config.php"
     
     # Restore uploads if needed
     if [ "$restore_uploads" == "1" ]; then
         rm -rf "$install_dir/uploads"
-        mv "$TMP_DIR/uploads_backup" "$install_dir/uploads"
+        mv "$tmp_dir/uploads_backup" "$install_dir/uploads"
     fi
     
     # Fix permissions immediately
     chown -R "$app:$app" "$install_dir"
+    
+    # Cleanup temp dir
+    rm -rf "$tmp_dir"
 fi
 # ynh_setup_source --dest_dir="$install_dir" --keep="database.php" # Replaced by git logic
 
