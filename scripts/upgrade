@@ -18,6 +18,10 @@ ynh_print_info "Upgrading from version: $old_version"
 # Check if it's already a git repo
 if [ -d "$install_dir/.git" ]; then
     ynh_print_info "Updating via git pull..."
+    
+    # Allow git operations in this directory even if owned by another user
+    git config --global --add safe.directory "$install_dir" || true
+    
     pushd "$install_dir"
     git pull origin main
     popd
