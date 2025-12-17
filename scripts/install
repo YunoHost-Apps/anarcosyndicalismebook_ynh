@@ -146,4 +146,12 @@ chmod -R 750 "$install_dir"
 #=================================================
 # END OF SCRIPT
 #=================================================
+
+# Display database credentials for manual setup if needed
+ynh_print_warn "IMPORTANT: Si l'application vous demande de configurer la base de données, utilisez ces informations :"
+ynh_print_info "Hôte : localhost"
+ynh_print_info "Base de données : $db_name"
+ynh_print_info "Utilisateur : $db_user"
+ynh_print_info "Mot de passe : $db_pwd"
+
 ynh_script_progression "Installation of $app completed"
