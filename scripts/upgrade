@@ -90,7 +90,14 @@ ynh_script_progression "Updating configuration files..."
 # Retrieve database credentials
 db_name=$(ynh_app_setting_get --key=db_name)
 db_user=$(ynh_app_setting_get --key=mysql_user)
+if [ -z "$db_user" ]; then
+  db_user=$(ynh_app_setting_get --key=db_user)
+fi
+
 db_pwd=$(ynh_app_setting_get --key=mysql_pwd)
+if [ -z "$db_pwd" ]; then
+  db_pwd=$(ynh_app_setting_get --key=db_pwd)
+fi
 
 # Retrieve admin email early for config
 admin_email=$(ynh_user_get_info --username="$admin" --key="mail")
