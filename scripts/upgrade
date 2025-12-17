@@ -20,8 +20,9 @@ if [ -d "$install_dir/.git" ]; then
     ynh_print_info "Updating via git pull..."
     
     pushd "$install_dir"
-    # Run git pull as the app user to avoid "dubious ownership" errors and permission issues
-    sudo -u "$app" git pull origin main
+    # Run git fetch and reset hard to force update and discard local changes (except ignored files like config.php)
+    sudo -u "$app" git fetch origin
+    sudo -u "$app" git reset --hard origin/main
     popd
 else
     ynh_print_info "Migrating to git installation..."
