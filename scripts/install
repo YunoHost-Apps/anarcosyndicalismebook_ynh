@@ -91,6 +91,11 @@ smtp_port=${smtp_port:-25}
 smtp_user=${smtp_user:-""}
 smtp_pass=${smtp_password:-""}
 
+# Prepare Contact Email
+if [ -z "${contact_email:-}" ]; then
+    contact_email="$admin_email"
+fi
+
 # Create includes directory
 mkdir -p "$install_dir/includes"
 

@@ -69,7 +69,12 @@ ram.runtime = "128M"
     ask.en = "SMTP Port"
     ask.fr = "Port SMTP"
     default = "25"
-
+    [install.contact_email]
+    type = "email"
+    ask.en = "Contact Email (recipient)"
+    ask.fr = "Email de contact (destinataire)"
+    example = "contact@example.com"
+    default = ""
     [install.smtp_user]
     type = "string"
     ask.en = "SMTP User (optional)"
