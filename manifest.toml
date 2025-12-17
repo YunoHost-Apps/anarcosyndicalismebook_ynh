@@ -34,7 +34,7 @@ ram.runtime = "128M"
 
     [install.path]
     type = "path"
-    default = "/bibliodrive"
+    default = "/"
 
     [install.init_main_permission]
     type = "group"
