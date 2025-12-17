@@ -1,8 +1,8 @@
 // Configuration générée le __DATE__
-define('SMTP_HOST', '127.0.0.1');
-define('SMTP_PORT', 25);
-define('SMTP_USER', '');
-define('SMTP_PASS', '');
+define('SMTP_HOST', '__SMTP_HOST__');
+define('SMTP_PORT', __SMTP_PORT__);
+define('SMTP_USER', '__SMTP_USER__');
+define('SMTP_PASS', '__SMTP_PASS__');
 define('SMTP_FROM', '__ADMIN_EMAIL__');
 define('SMTP_FROM_NAME', 'AnarcosyndicalismeBOOK');
 define('CONTACT_EMAIL', '__ADMIN_EMAIL__');

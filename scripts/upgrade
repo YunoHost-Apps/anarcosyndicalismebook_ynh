@@ -120,13 +120,31 @@ mkdir -p "$install_dir/includes"
 # Generate database.php in includes/
 ynh_config_add --template="database.php" --destination="$install_dir/includes/database.php"
 
-# Retrieve hCaptcha keys from old config if present
+# Retrieve hCaptcha and SMTP keys from old config if present
 old_hcaptcha_site_key=""
 old_hcaptcha_secret_key=""
+old_smtp_host="127.0.0.1"
+old_smtp_port="25"
+old_smtp_user=""
+old_smtp_pass=""
+
 if [[ -f "$install_dir/includes/config.php" ]]; then
     old_hcaptcha_site_key=$(grep "HCAPTCHA_SITE_KEY" "$install_dir/includes/config.php" | cut -d "'" -f 4)
     old_hcaptcha_secret_key=$(grep "HCAPTCHA_SECRET_KEY" "$install_dir/includes/config.php" | cut -d "'" -f 4)
+    
+    # Extract SMTP settings
+    old_smtp_host=$(grep "SMTP_HOST" "$install_dir/includes/config.php" | cut -d "'" -f 4)
+    # Port might be integer (no quotes) or string
+    old_smtp_port=$(grep "SMTP_PORT" "$install_dir/includes/config.php" | sed "s/.*, *//;s/);//")
+    # Clean up port just in case
+    old_smtp_port=${old_smtp_port//\'/}
+    
+    old_smtp_user=$(grep "SMTP_USER" "$install_dir/includes/config.php" | cut -d "'" -f 4)
+    old_smtp_pass=$(grep "SMTP_PASS" "$install_dir/includes/config.php" | cut -d "'" -f 4)
 fi
+# Set defaults if extracting failed resulted in empty
+old_smtp_host=${old_smtp_host:-"127.0.0.1"}
+old_smtp_port=${old_smtp_port:-25}
 
 # Generate config.php in includes/ to bypass installer
 ynh_config_add --template="config.php" --destination="$install_dir/includes/config.php"
@@ -138,6 +156,12 @@ sed -i "s|__PATH__|$clean_path|g" "$install_dir/includes/config.php"
 # Restore hCaptcha keys
 sed -i "s|__HCAPTCHA_SITE_KEY__|$old_hcaptcha_site_key|g" "$install_dir/includes/config.php"
 sed -i "s|__HCAPTCHA_SECRET_KEY__|$old_hcaptcha_secret_key|g" "$install_dir/includes/config.php"
+
+# Restore SMTP settings
+sed -i "s|__SMTP_HOST__|$old_smtp_host|g" "$install_dir/includes/config.php"
+sed -i "s|__SMTP_PORT__|$old_smtp_port|g" "$install_dir/includes/config.php"
+sed -i "s|__SMTP_USER__|$old_smtp_user|g" "$install_dir/includes/config.php"
+sed -i "s|__SMTP_PASS__|$old_smtp_pass|g" "$install_dir/includes/config.php"
 # __DATE__ is handled by ynh_config_add because $date is defined
 
 # DEBUG: Check if files exist and are not empty
