@@ -28,7 +28,11 @@ chmod -R 750 "$data_dir"
 #=================================================
 ynh_script_progression "Restoring the MySQL database..."
 
-ynh_mysql_db_shell < db.sql
+if [[ -f "db.sql" ]]; then
+    ynh_mysql_db_shell < db.sql
+else
+    ynh_die "Database backup file not found: db.sql"
+fi
 
 #=================================================
 # RESTORE SYSTEM CONFIGURATIONS

@@ -3,6 +3,9 @@
 source _common.sh
 source /usr/share/yunohost/helpers
 
+# Check PHP version availability
+check_php_version
+
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
@@ -45,6 +48,14 @@ mkdir -p "$data_dir/backups"
 # Set permissions on data directories first
 chown -R "$app:www-data" "$data_dir"
 chmod -R 750 "$data_dir"
+
+# Remove existing directories before creating symlinks
+if [[ -e "$install_dir/uploads" ]]; then
+    rm -rf "$install_dir/uploads"
+fi
+if [[ -e "$install_dir/backups" ]]; then
+    rm -rf "$install_dir/backups"
+fi
 
 # Symlink uploads to data_dir for persistence
 ln -sf "$data_dir/uploads" "$install_dir/uploads"

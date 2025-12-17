@@ -3,6 +3,9 @@
 source _common.sh
 source /usr/share/yunohost/helpers
 
+# Check PHP version availability
+check_php_version
+
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
@@ -36,6 +39,14 @@ ynh_config_add_nginx
 #=================================================
 ynh_script_progression "Restoring symlinks..."
 
+# Remove existing directories/links before creating symlinks
+if [[ -e "$install_dir/uploads" ]]; then
+    rm -rf "$install_dir/uploads"
+fi
+if [[ -e "$install_dir/backups" ]]; then
+    rm -rf "$install_dir/backups"
+fi
+
 ln -sf "$data_dir/uploads" "$install_dir/uploads"
 ln -sf "$data_dir/backups" "$install_dir/backups"
 
@@ -46,8 +57,12 @@ ynh_script_progression "Setting permissions..."
 
 chown -R "$app:www-data" "$install_dir"
 chmod -R 750 "$install_dir"
-chmod 400 "$install_dir/database.php"
-chown "$app:$app" "$install_dir/database.php"
+
+# Set specific permissions for database config if it exists
+if [[ -f "$install_dir/database.php" ]]; then
+    chmod 400 "$install_dir/database.php"
+    chown "$app:$app" "$install_dir/database.php"
+fi
 
 #=================================================
 # END OF SCRIPT
