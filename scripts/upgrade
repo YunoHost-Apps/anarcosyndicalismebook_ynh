@@ -168,19 +168,21 @@ if [ -z "$db_pwd" ]; then
   db_pwd=$(ynh_app_setting_get --key=mysql_pwd)
 fi
 
-# Retrieve admin email early for config
+# Retrieve admin user and email
+admin=$(ynh_app_setting_get --key=admin)
 admin_email=$(ynh_user_get_info --username="$admin" --key="mail")
-# Wait, $admin is not defined in UPGRADE script usually! We need to get it from settings or use admin email from settings.
-# Let's use the first YunoHost admin email if stored, or just use 'root@$domain' as fallback if $admin variable is empty.
-# Usually standard variable $admin exists? No, only in install.
-# We must retrieve the admin user or email from app settings if we stored it?
-# Or just use a generic email.
-# Let's try to get relevant email.
-admin_email=$(ynh_app_setting_get --key=admin_email) # If we stored it?
-if [[ -z "$admin_email" ]]; then
-     # Fallback to system mail
-     admin_email="root@$domain"
+
+# Retrieve SMTP settings
+smtp_user=$(ynh_app_setting_get --key=smtp_user)
+
+# Define variables for new config placeholders
+contact_email=${contact_email:-"$admin_email"}
+if [ -n "$smtp_user" ]; then
+    smtp_from="$smtp_user"
+else
+    smtp_from="$admin_email"
 fi
+
 date=$(date +"%Y-%m-%d %H:%M:%S")
 
 # Create includes directory
