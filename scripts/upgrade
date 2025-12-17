@@ -25,6 +25,7 @@ ynh_script_progression "Upgrading Composer dependencies..."
 # Check if composer.json exists before installing dependencies
 if [[ -f "$install_dir/composer.json" ]]; then
     ynh_composer_install
+    ynh_composer_exec --commands="install --no-dev --prefer-dist --optimize-autoloader"
 else
     ynh_print_info "No composer.json found, skipping Composer dependencies installation"
 fi
