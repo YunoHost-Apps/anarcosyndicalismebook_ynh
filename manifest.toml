@@ -7,7 +7,7 @@ name = "AnarcosyndicalismeBOOK"
 description.en = "Digital library CMS for sharing texts, PDFs and EPUBs"
 description.fr = "CMS de bibliothèque numérique pour partager textes, PDF et EPUB"
 
-version = "1.0.0~ynh2"
+version = "1.0.0~ynh3"
 
 maintainers = ["YunoHost Community"]
 
@@ -90,7 +90,7 @@ ram.runtime = "128M"
 [resources]
     [resources.sources.main]
     url = "https://gitlab.com/anarchymedialibertaire-group/anarcosyndicalismebook/-/archive/main/anarcosyndicalismebook-main.tar.gz"
-    sha256 = "0000000000000000000000000000000000000000000000000000000000000000"
+    sha256 = "9a82fc34be2e445112e8acca004a46ba5473e1726a08a60698f924ed1b1b1747"
     autoupdate.strategy = "latest_gitlab_tag"
     autoupdate.upstream = "https://gitlab.com/anarchymedialibertaire-group/anarcosyndicalismebook"
 
@@ -106,7 +106,7 @@ ram.runtime = "128M"
     admin.allowed = "admins"
 
     [resources.apt]
-    packages = "mariadb-server, php8.2-mysql, php8.2-curl, php8.2-mbstring, php8.2-fileinfo, php8.2-sqlite3, php8.2-xml"
+    packages = "git, mariadb-server, php8.2-mysql, php8.2-curl, php8.2-mbstring, php8.2-fileinfo, php8.2-sqlite3, php8.2-xml"
 
     [resources.database]
     type = "mysql"
