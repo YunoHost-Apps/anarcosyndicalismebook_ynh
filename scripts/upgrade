@@ -43,6 +43,7 @@ else
     
     # Remove old files (except user data which should be in data_dir, but uploads are in install_dir/uploads usually?)
     # Cleaning directory but preserving uploads if they are inside
+    restore_uploads=0
     if [ -d "$install_dir/uploads" ] && [ ! -L "$install_dir/uploads" ]; then
          mv "$install_dir/uploads" "$tmp_dir/uploads_backup"
          restore_uploads=1
