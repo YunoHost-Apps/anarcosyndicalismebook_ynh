@@ -11,6 +11,10 @@ check_php_version
 #=================================================
 ynh_script_progression "Upgrading source files..."
 
+# Store current version for potential rollback
+old_version=$(ynh_app_setting_get --key=version)
+ynh_print_info "Upgrading from version: $old_version"
+
 ynh_setup_source --dest_dir="$install_dir" --keep="database.php"
 
 #=================================================
@@ -35,6 +39,17 @@ ynh_config_add_phpfpm
 ynh_config_add_nginx
 
 #=================================================
+# ENSURE DATA DIRECTORIES EXIST
+#=================================================
+ynh_script_progression "Ensuring data directories exist..."
+
+mkdir -p "$data_dir/uploads/site"
+mkdir -p "$data_dir/uploads/auteurs"
+mkdir -p "$data_dir/uploads/textes"
+mkdir -p "$data_dir/uploads/avatars"
+mkdir -p "$data_dir/backups"
+
+#=================================================
 # RESTORE SYMLINKS
 #=================================================
 ynh_script_progression "Restoring symlinks..."
@@ -47,8 +62,25 @@ if [[ -e "$install_dir/backups" ]]; then
     rm -rf "$install_dir/backups"
 fi
 
+# Create symlinks
 ln -sf "$data_dir/uploads" "$install_dir/uploads"
 ln -sf "$data_dir/backups" "$install_dir/backups"
+
+# Verify symlinks were created successfully
+if [[ ! -L "$install_dir/uploads" ]] || [[ ! -L "$install_dir/backups" ]]; then
+    ynh_die "Failed to create symlinks for data directories"
+fi
+
+#=================================================
+# RUN DATABASE MIGRATIONS IF NEEDED
+#=================================================
+ynh_script_progression "Checking for database updates..."
+
+# Check if there are any database migration scripts to run
+if [[ -f "$install_dir/sql/migrations.sql" ]]; then
+    ynh_print_info "Running database migrations..."
+    ynh_mysql_db_shell < "$install_dir/sql/migrations.sql"
+fi
 
 #=================================================
 # SET PERMISSIONS
@@ -57,6 +89,10 @@ ynh_script_progression "Setting permissions..."
 
 chown -R "$app:www-data" "$install_dir"
 chmod -R 750 "$install_dir"
+
+# Set permissions on data directories
+chown -R "$app:www-data" "$data_dir"
+chmod -R 750 "$data_dir"
 
 # Set specific permissions for database config if it exists
 if [[ -f "$install_dir/database.php" ]]; then

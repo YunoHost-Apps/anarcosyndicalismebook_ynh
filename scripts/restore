@@ -28,10 +28,16 @@ chmod -R 750 "$data_dir"
 #=================================================
 ynh_script_progression "Restoring the MySQL database..."
 
-if [[ -f "db.sql" ]]; then
-    ynh_mysql_db_shell < db.sql
-else
+if [[ ! -f "db.sql" ]]; then
     ynh_die "Database backup file not found: db.sql"
+fi
+
+if [[ ! -s "db.sql" ]]; then
+    ynh_die "Database backup file is empty"
+fi
+
+if ! ynh_mysql_db_shell < db.sql; then
+    ynh_die "Failed to restore database"
 fi
 
 #=================================================
