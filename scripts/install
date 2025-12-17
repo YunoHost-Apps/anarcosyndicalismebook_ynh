@@ -92,8 +92,8 @@ hashed_password=$(php -r "echo password_hash('$admin_password', PASSWORD_DEFAULT
 
 # Use prepared statement for security
 ynh_mysql_db_shell <<EOF
-INSERT INTO utilisateurs (nom, email, mot_de_passe, role, date_inscription) 
-VALUES ('${admin}', '${admin_email}', '${hashed_password}', 'admin', NOW());
+INSERT INTO utilisateur (nom, prenom, mel, motpasse, role, dateinscription) 
+VALUES ('${admin}', 'Admin', '${admin_email}', '${hashed_password}', 'admin', NOW());
 EOF
 
 #=================================================
