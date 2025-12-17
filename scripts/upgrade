@@ -26,10 +26,20 @@ else
     
     # Create temp dir
     local tmp_dir=$(mktemp -d)
+    ynh_print_info "Using temp dir: $tmp_dir"
     
     # Backup configuration files
-    cp "$install_dir/includes/database.php" "$tmp_dir/database.php.backup"
-    cp "$install_dir/includes/config.php" "$tmp_dir/config.php.backup"
+    if [ -f "$install_dir/includes/database.php" ]; then
+        cp "$install_dir/includes/database.php" "$tmp_dir/database.php.backup"
+    else
+        ynh_print_warn "includes/database.php NOT found, skipping backup"
+    fi
+    
+    if [ -f "$install_dir/includes/config.php" ]; then
+        cp "$install_dir/includes/config.php" "$tmp_dir/config.php.backup"
+    else
+        ynh_print_warn "includes/config.php NOT found, skipping backup"
+    fi
     
     # Remove old files (except user data which should be in data_dir, but uploads are in install_dir/uploads usually?)
     # Cleaning directory but preserving uploads if they are inside
@@ -47,8 +57,12 @@ else
     
     # Restore config
     mkdir -p "$install_dir/includes"
-    cp "$tmp_dir/database.php.backup" "$install_dir/includes/database.php"
-    cp "$tmp_dir/config.php.backup" "$install_dir/includes/config.php"
+    if [ -f "$tmp_dir/database.php.backup" ]; then
+        cp "$tmp_dir/database.php.backup" "$install_dir/includes/database.php"
+    fi
+    if [ -f "$tmp_dir/config.php.backup" ]; then
+        cp "$tmp_dir/config.php.backup" "$install_dir/includes/config.php"
+    fi
     
     # Restore uploads if needed
     if [ "$restore_uploads" == "1" ]; then
