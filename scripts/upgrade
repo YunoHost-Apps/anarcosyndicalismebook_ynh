@@ -25,7 +25,7 @@ else
     ynh_print_info "Migrating to git installation..."
     
     # Create temp dir
-    local tmp_dir=$(mktemp -d)
+    tmp_dir=$(mktemp -d)
     ynh_print_info "Using temp dir: $tmp_dir"
     
     # Backup configuration files
