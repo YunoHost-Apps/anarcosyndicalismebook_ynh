@@ -146,6 +146,9 @@ fi
 old_smtp_host=${old_smtp_host:-"127.0.0.1"}
 old_smtp_port=${old_smtp_port:-25}
 
+# Define smtp_pass to satisfy ynh_config_add placeholder replacement
+smtp_pass="$old_smtp_pass"
+
 # Generate config.php in includes/ to bypass installer
 ynh_config_add --template="config.php" --destination="$install_dir/includes/config.php"
 sed -i "s|__ADMIN_EMAIL__|$admin_email|g" "$install_dir/includes/config.php"
@@ -161,7 +164,8 @@ sed -i "s|__HCAPTCHA_SECRET_KEY__|$old_hcaptcha_secret_key|g" "$install_dir/incl
 sed -i "s|__SMTP_HOST__|$old_smtp_host|g" "$install_dir/includes/config.php"
 sed -i "s|__SMTP_PORT__|$old_smtp_port|g" "$install_dir/includes/config.php"
 sed -i "s|__SMTP_USER__|$old_smtp_user|g" "$install_dir/includes/config.php"
-sed -i "s|__SMTP_PASS__|$old_smtp_pass|g" "$install_dir/includes/config.php"
+# __SMTP_PASS__ is handled by ynh_config_add because $smtp_pass is defined
+# sed -i "s|__SMTP_PASS__|$old_smtp_pass|g" "$install_dir/includes/config.php"
 # __DATE__ is handled by ynh_config_add because $date is defined
 
 # DEBUG: Check if files exist and are not empty

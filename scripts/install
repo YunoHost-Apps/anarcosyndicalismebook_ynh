@@ -104,12 +104,14 @@ sed -i "s|__HCAPTCHA_SECRET_KEY__|$hcaptcha_secret_key|g" "$install_dir/includes
 smtp_host=${smtp_host:-"127.0.0.1"}
 smtp_port=${smtp_port:-25}
 smtp_user=${smtp_user:-""}
-smtp_password=${smtp_password:-""}
+smtp_pass=${smtp_password:-""}
 
 sed -i "s|__SMTP_HOST__|$smtp_host|g" "$install_dir/includes/config.php"
 sed -i "s|__SMTP_PORT__|$smtp_port|g" "$install_dir/includes/config.php"
 sed -i "s|__SMTP_USER__|$smtp_user|g" "$install_dir/includes/config.php"
-sed -i "s|__SMTP_PASS__|$smtp_password|g" "$install_dir/includes/config.php"
+# __SMTP_PASS__ is handled by ynh_config_add because $smtp_pass is defined
+# but we can also sed it if ynh_config_add missed it (which it won't if var is set)
+# sed -i "s|__SMTP_PASS__|$smtp_pass|g" "$install_dir/includes/config.php"
 # __DATE__ is handled by ynh_config_add because $date is defined
 
 chmod 644 "$install_dir/includes/config.php"
