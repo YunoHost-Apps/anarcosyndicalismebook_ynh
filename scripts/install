@@ -16,7 +16,6 @@ ynh_setup_source --dest_dir="$install_dir"
 ynh_script_progression "Installing Composer dependencies..."
 
 ynh_composer_install
-ynh_composer_exec install --no-dev
 
 #=================================================
 # SYSTEM CONFIGURATION
@@ -38,12 +37,13 @@ mkdir -p "$data_dir/uploads/textes"
 mkdir -p "$data_dir/uploads/avatars"
 mkdir -p "$data_dir/backups"
 
+# Set permissions on data directories first
+chown -R "$app:www-data" "$data_dir"
+chmod -R 750 "$data_dir"
+
 # Symlink uploads to data_dir for persistence
 ln -sf "$data_dir/uploads" "$install_dir/uploads"
 ln -sf "$data_dir/backups" "$install_dir/backups"
-
-chown -R "$app:www-data" "$data_dir"
-chmod -R 750 "$data_dir"
 
 #=================================================
 # ADD A CONFIGURATION
@@ -60,7 +60,11 @@ chown "$app:$app" "$install_dir/database.php"
 #=================================================
 ynh_script_progression "Importing database..."
 
-ynh_mysql_db_shell < "$install_dir/database_numerique.sql"
+if [[ -f "$install_dir/database_numerique.sql" ]]; then
+    ynh_mysql_db_shell < "$install_dir/database_numerique.sql"
+else
+    ynh_die "Database schema file not found: $install_dir/database_numerique.sql"
+fi
 
 #=================================================
 # CREATE ADMIN USER
@@ -70,7 +74,11 @@ ynh_script_progression "Creating admin user..."
 admin_email=$(ynh_user_get_info --username="$admin" --key="mail")
 hashed_password=$(php -r "echo password_hash('$admin_password', PASSWORD_DEFAULT);")
 
-ynh_mysql_db_shell <<< "INSERT INTO utilisateurs (nom, email, mot_de_passe, role, date_inscription) VALUES ('$admin', '$admin_email', '$hashed_password', 'admin', NOW());"
+# Use prepared statement for security
+ynh_mysql_db_shell <<EOF
+INSERT INTO utilisateurs (nom, email, mot_de_passe, role, date_inscription) 
+VALUES ('${admin}', '${admin_email}', '${hashed_password}', 'admin', NOW());
+EOF
 
 #=================================================
 # SET PERMISSIONS
