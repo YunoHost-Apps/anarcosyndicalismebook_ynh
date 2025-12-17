@@ -97,6 +97,17 @@ ynh_replace_string "__DATE__" "$current_date" "$install_dir/includes/config.php"
 chmod 644 "$install_dir/includes/config.php"
 chown "$app:$app" "$install_dir/includes/config.php"
 
+# DEBUG: Check if files exist and are not empty
+ynh_print_info "DEBUG: Listing includes directory:"
+ls -la "$install_dir/includes/"
+if [[ ! -s "$install_dir/includes/config.php" ]]; then
+    ynh_print_warn "WARNING: config.php is empty or missing!"
+fi
+if [[ -z "$db_pwd" ]]; then
+    ynh_print_warn "WARNING: db_pwd variable is empty!"
+fi
+# END DEBUG
+
 # Remove the installer scripts for security
 rm -f "$install_dir/install.php" "$install_dir/install_app.php"
 
