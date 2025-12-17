@@ -15,7 +15,12 @@ ynh_setup_source --dest_dir="$install_dir"
 #=================================================
 ynh_script_progression "Installing Composer dependencies..."
 
-ynh_composer_install
+# Check if composer.json exists before installing dependencies
+if [[ -f "$install_dir/composer.json" ]]; then
+    ynh_composer_install
+else
+    ynh_print_info "No composer.json found, skipping Composer dependencies installation"
+fi
 
 #=================================================
 # SYSTEM CONFIGURATION
