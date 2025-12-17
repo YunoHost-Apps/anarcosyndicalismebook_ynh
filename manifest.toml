@@ -65,10 +65,10 @@ ram.runtime = "128M"
     default = "127.0.0.1"
 
     [install.smtp_port]
-    type = "number"
+    type = "string"
     ask.en = "SMTP Port"
     ask.fr = "Port SMTP"
-    default = 25
+    default = "25"
 
     [install.smtp_user]
     type = "string"
