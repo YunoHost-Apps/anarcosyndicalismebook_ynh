@@ -85,13 +85,13 @@ chown "$app:$app" "$install_dir/includes/database.php"
 
 # Generate config.php in includes/ to bypass installer
 ynh_config_add --template="config.php" --destination="$install_dir/includes/config.php"
-ynh_replace_string "__ADMIN_EMAIL__" "$admin_email" "$install_dir/includes/config.php"
-ynh_replace_string "__DOMAIN__" "$domain" "$install_dir/includes/config.php"
+sed -i "s|__ADMIN_EMAIL__|$admin_email|g" "$install_dir/includes/config.php"
+sed -i "s|__DOMAIN__|$domain|g" "$install_dir/includes/config.php"
 # Clean path: remove trailing slash if present, though YunoHost $path usually has one?
 # The PHP installer trims right slash. Let's ensure it's clean.
 # Actually $path in YunoHost is usually / or /foo/.
 clean_path=${path%/}
-ynh_replace_string "__PATH__" "$clean_path" "$install_dir/includes/config.php"
+sed -i "s|__PATH__|$clean_path|g" "$install_dir/includes/config.php"
 # __DATE__ is handled by ynh_config_add because $date is defined
 
 chmod 644 "$install_dir/includes/config.php"
