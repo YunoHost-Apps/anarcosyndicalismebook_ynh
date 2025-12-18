@@ -1,0 +1,38 @@
+# GitLab CI - Auto-update du checksum SHA256
+# Se déclenche automatiquement ou manuellement
+
+stages:
+  - update
+
+variables:
+  SOURCE_URL: "https://gitlab.com/anarchymedialibertaire-group/anarcosyndicalismebook/-/archive/main/anarcosyndicalismebook-main.tar.gz"
+
+update_checksum:
+  stage: update
+  image: alpine:latest
+  # Déclencher manuellement OU via webhook/schedule
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "web"      # Bouton "Run pipeline" dans GitLab
+    - if: $CI_PIPELINE_SOURCE == "trigger"  # Via API/webhook
+    - if: $CI_PIPELINE_SOURCE == "schedule" # Via schedule programmé
+  before_script:
+    - apk add --no-cache curl git sed
+    - git config --global user.email "ci@gitlab.com"
+    - git config --global user.name "GitLab CI"
+  script:
+    - echo "📥 Téléchargement et calcul du checksum..."
+    - NEW_SHA=$(curl -sL "$SOURCE_URL" | sha256sum | cut -d' ' -f1)
+    - OLD_SHA=$(grep -oP 'sha256 = "\K[^"]+' manifest.toml | head -1)
+    - echo "Ancien SHA256 = $OLD_SHA"
+    - echo "Nouveau SHA256 = $NEW_SHA"
+    - |
+      if [ "$NEW_SHA" != "$OLD_SHA" ]; then
+        echo "🔄 Mise à jour du manifest..."
+        sed -i "s/sha256 = \"$OLD_SHA\"/sha256 = \"$NEW_SHA\"/" manifest.toml
+        git add manifest.toml
+        git commit -m "🔄 Auto-update source checksum"
+        git push https://oauth2:${CI_JOB_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git HEAD:main
+        echo "✅ Checksum mis à jour et poussé !"
+      else
+        echo "✅ Checksum déjà à jour, rien à faire."
+      fi
