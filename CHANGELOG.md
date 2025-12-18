@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.0.0~ynh19] - 2025-12-18
+
+### Corrigé
+- Correction bug session : 2FA demandé à tort après inscription.
+
 ## [1.0.0~ynh18] - 2025-12-18
 
 ### Amélioré
