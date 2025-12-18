@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.0.0~ynh16] - 2025-12-18
+
+### Corrigé
+- Correction de l'affichage du QR Code 2FA (remplacement de l'API Google Charts).
+
+## [1.0.0~ynh15] - 2025-12-18
+
+### Ajouté
+- Support de l'authentification à deux facteurs (2FA/TOTP).
+- Migration automatique de la base de données pour supporter le 2FA.
+- Amélioration de l'interface mobile (actions de profil).
+
 ## [1.0.0~ynh2] - 2025-12-17
 
 Cette version apporte des correctifs majeurs pour la stabilité, le déploiement et la configuration des emails.
