@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.0.0~ynh17] - 2025-12-18
+
+### Corrigé
+- Correction de l'enregistrement des paramètres SEO dans l'administration.
+
 ## [1.0.0~ynh16] - 2025-12-18
 
 ### Corrigé
