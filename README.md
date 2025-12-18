@@ -9,7 +9,7 @@ It shall NOT be edited by hand.
 </h1>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.0.0-blue?style=for-the-badge" alt="Version 1.0.0">
+  <img src="https://img.shields.io/badge/version-1.0.0-black?style=for-the-badge" alt="Version 1.0.0">
   <img src="https://img.shields.io/badge/YunoHost-11.2+-41b883?style=for-the-badge&logo=yunohost&logoColor=white" alt="YunoHost 11.2+">
   <img src="https://img.shields.io/badge/PHP-8.2-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP 8.2">
   <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="MIT">
@@ -39,12 +39,13 @@ Conçu pour les collectifs, associations, syndicats souhaitant diffuser des text
 - Recherche par titre, auteur, contenu
 - Organisation par catégories thématiques
 - Favoris et liste de lecture personnelle
+- **Authentification sécurisée (2FA/TOTP)**
 - Flux RSS et sitemap XML dynamique
 - PWA installable avec mode hors-ligne
 - Widget d'accessibilité complet
 - Partage social (Mastodon, Bluesky, Telegram, etc.)
 
-**Version incluse :** 1.0.0~ynh5
+**Version incluse :** 1.0.0~ynh15
 
 **Licence :** MIT
 
