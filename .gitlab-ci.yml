@@ -10,8 +10,9 @@ variables:
 update_checksum:
   stage: update
   image: alpine:latest
-  # Déclencher manuellement OU via webhook/schedule
+  # Déclencher sur push, manuellement, ou via webhook/schedule
   rules:
+    - if: $CI_COMMIT_BRANCH == "main"       # Sur chaque push vers main
     - if: $CI_PIPELINE_SOURCE == "web"      # Bouton "Run pipeline" dans GitLab
     - if: $CI_PIPELINE_SOURCE == "trigger"  # Via API/webhook
     - if: $CI_PIPELINE_SOURCE == "schedule" # Via schedule programmé
