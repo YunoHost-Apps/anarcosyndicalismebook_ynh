@@ -23,7 +23,7 @@ update_checksum:
   script:
     - echo "📥 Téléchargement et calcul du checksum..."
     - NEW_SHA=$(curl -sL "$SOURCE_URL" | sha256sum | cut -d' ' -f1)
-    - OLD_SHA=$(grep -oP 'sha256 = "\K[^"]+' manifest.toml | head -1)
+    - OLD_SHA=$(sed -n 's/.*sha256 = "\([^"]*\)".*/\1/p' manifest.toml | head -1)
     - echo "Ancien SHA256 = $OLD_SHA"
     - echo "Nouveau SHA256 = $NEW_SHA"
     - |
