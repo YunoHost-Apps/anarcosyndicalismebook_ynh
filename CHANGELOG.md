@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.0.0~ynh18] - 2025-12-18
+
+### Amélioré
+- Affichage du titre du site à côté du logo personnalisé.
+
 ## [1.0.0~ynh17] - 2025-12-18
 
 ### Corrigé
