@@ -180,7 +180,9 @@ contact_email=${contact_email:-"$admin_email"}
 if [ -n "$smtp_user" ]; then
     smtp_from="$smtp_user"
 else
-    smtp_from="$admin_email"
+    # Utiliser l'email par défaut du domaine
+    smtp_user="newletter@$domain"
+    smtp_from="$smtp_user"
 fi
 
 date=$(date +"%Y-%m-%d %H:%M:%S")
