@@ -100,9 +100,7 @@ fi
 if [ -n "$smtp_user" ]; then
     smtp_from="$smtp_user"
 else
-    # Utiliser l'email par défaut du domaine
-    smtp_user="newletter@$domain"
-    smtp_from="$smtp_user"
+    smtp_from="$admin_email"
 fi
 
 # Create includes directory

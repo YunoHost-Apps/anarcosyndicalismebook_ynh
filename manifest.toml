@@ -77,20 +77,23 @@ ram.runtime = "128M"
     default = ""
     [install.smtp_user]
     type = "string"
-    ask.en = "SMTP User (optional)"
-    ask.fr = "Utilisateur SMTP (facultatif)"
-    optional = true
+    ask.en = "SMTP User (email address for sending)"
+    ask.fr = "Utilisateur SMTP (adresse email pour l'envoi)"
+    example = "contact@yourdomain.org"
+    help.en = "Email address used to send contact form messages"
+    help.fr = "Adresse email utilisée pour envoyer les messages du formulaire de contact"
 
     [install.smtp_password]
     type = "password"
-    ask.en = "SMTP Password (optional)"
-    ask.fr = "Mot de passe SMTP (facultatif)"
-    optional = true
+    ask.en = "SMTP Password"
+    ask.fr = "Mot de passe SMTP"
+    help.en = "Password for the SMTP email account"
+    help.fr = "Mot de passe du compte email SMTP"
 
 [resources]
     [resources.sources.main]
     url = "https://gitlab.com/anarchymedialibertaire-group/anarcosyndicalismebook/-/archive/main/anarcosyndicalismebook-main.tar.gz"
-    sha256 = "399fdc3950bc00f2effc470fade6d261dc67a8156f912fe420e7d8d20c69090b"
+    sha256 = "3929b84353490cf50e6dd12bfa3108cae8905a439d6d157e2a6ab2245438283a"
     autoupdate.strategy = "latest_gitlab_tag"
     autoupdate.upstream = "https://gitlab.com/anarchymedialibertaire-group/anarcosyndicalismebook"
 

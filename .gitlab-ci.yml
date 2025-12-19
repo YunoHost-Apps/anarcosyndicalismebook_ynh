@@ -32,7 +32,12 @@ update_checksum:
         sed -i "s/sha256 = \"$OLD_SHA\"/sha256 = \"$NEW_SHA\"/" manifest.toml
         git add manifest.toml
         git commit -m "🔄 Auto-update source checksum"
-        git push https://oauth2:${CI_PUSH_TOKEN}@gitlab.com/${CI_PROJECT_PATH}.git HEAD:main
+        if [ -z "$CI_PUSH_TOKEN" ]; then
+          echo "❌ Erreur: La variable CI_PUSH_TOKEN est vide !"
+          exit 1
+        fi
+        git remote set-url origin "https://token:${CI_PUSH_TOKEN}@gitlab.com/${CI_PROJECT_PATH}.git"
+        git push origin HEAD:main
         echo "✅ Checksum mis à jour et poussé !"
       else
         echo "✅ Checksum déjà à jour, rien à faire."
