@@ -7,7 +7,7 @@ Conçu pour les collectifs, associations, syndicats souhaitant diffuser des text
 - Lecture en ligne de PDF et EPUB avec mode plein écran
 - Upload et gestion de fichiers (TXT, PDF, EPUB)
 - Import en masse par drag & drop
-- Import depuis Calibre (metadata.db ou serveur OPDS)
+- Import depuis Calibre ou wikisource (metadata.db ou serveur OPDS)
 - Recherche par titre, auteur, contenu
 - Organisation par catégories thématiques
 - Favoris et liste de lecture personnelle
