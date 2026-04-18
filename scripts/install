@@ -11,9 +11,7 @@ check_php_version
 #=================================================
 ynh_script_progression "Setting up source files..."
 
-# Clone git repository to have .git directory available
-git clone "https://gitlab.com/anarchymedialibertaire-group/anarcosyndicalismebook.git" "$install_dir"
-# ynh_setup_source --dest_dir="$install_dir" # Replaced by git clone
+ynh_setup_source --dest_dir="$install_dir"
 
 #=================================================
 # INSTALL COMPOSER DEPENDENCIES
@@ -87,70 +85,8 @@ chmod 775 "$install_dir/api/temp_migration"
 #=================================================
 ynh_script_progression "Adding app's configuration..."
 
-# Retrieve database credentials (YunoHost helpers v2.1 uses db_user/db_pwd)
-db_name=$(ynh_app_setting_get --key=db_name)
-db_user=$(ynh_app_setting_get --key=db_user)
-db_pwd=$(ynh_app_setting_get --key=db_pwd)
-
-# Retrieve admin email early for config
-admin_email=$(ynh_user_get_info --username="$admin" --key="mail")
-date=$(date +"%Y-%m-%d %H:%M:%S")
-
-# Prepare hCaptcha settings (optional)
-hcaptcha_site_key=${hcaptcha_site_key:-""}
-hcaptcha_secret_key=${hcaptcha_secret_key:-""}
-
-# Prepare SMTP settings
-smtp_host=${smtp_host:-"127.0.0.1"}
-smtp_port=${smtp_port:-25}
-smtp_user=${smtp_user:-""}
-smtp_pass=${smtp_password:-""}
-
-# Prepare Contact Email
-if [ -z "${contact_email:-}" ]; then
-    contact_email="$admin_email"
-fi
-
-# Prepare SMTP From address
-if [ -n "$smtp_user" ]; then
-    smtp_from="$smtp_user"
-else
-    smtp_from="$admin_email"
-fi
-
-# Create includes directory
-mkdir -p "$install_dir/includes"
-
-# Generate database.php in includes/
-ynh_config_add --template="database.php" --destination="$install_dir/includes/database.php"
-chmod 400 "$install_dir/includes/database.php"
-chown "$app:$app" "$install_dir/includes/database.php"
-
-# Generate config.php in includes/ to bypass installer
-# ynh_config_add will automatically replace __HCAPTCHA_*__ and __SMTP_*__ because variables are defined above
-ynh_config_add --template="config.php" --destination="$install_dir/includes/config.php"
-sed -i "s|__ADMIN_EMAIL__|$admin_email|g" "$install_dir/includes/config.php"
-sed -i "s|__DOMAIN__|$domain|g" "$install_dir/includes/config.php"
-# Clean path: remove trailing slash if present, though YunoHost $path usually has one?
-# The PHP installer trims right slash. Let's ensure it's clean.
-# Actually $path in YunoHost is usually / or /foo/.
-clean_path=${path%/}
-sed -i "s|__PATH__|$clean_path|g" "$install_dir/includes/config.php"
-# __DATE__ is handled by ynh_config_add because $date is defined
-
-chmod 644 "$install_dir/includes/config.php"
-chown "$app:$app" "$install_dir/includes/config.php"
-
-# DEBUG: Check if files exist and are not empty
-ynh_print_info "DEBUG: Listing includes directory:"
-ls -la "$install_dir/includes/"
-if [[ ! -s "$install_dir/includes/config.php" ]]; then
-    ynh_print_warn "WARNING: config.php is empty or missing!"
-fi
-if [[ -z "$db_pwd" ]]; then
-    ynh_print_warn "WARNING: db_pwd variable is empty!"
-fi
-# END DEBUG
+load_app_settings
+render_app_config
 
 # Remove the installer scripts for security
 rm -f "$install_dir/install.php" "$install_dir/install_app.php"
@@ -160,10 +96,10 @@ rm -f "$install_dir/install.php" "$install_dir/install_app.php"
 #=================================================
 ynh_script_progression "Importing database..."
 
-if [[ -f "$install_dir/database_numerique.sql" ]]; then
-    ynh_mysql_db_shell < "$install_dir/database_numerique.sql"
+if [[ -f "$install_dir/sql/database_numerique.sql" ]]; then
+    ynh_mysql_db_shell < "$install_dir/sql/database_numerique.sql"
 else
-    ynh_die "Database schema file not found: $install_dir/database_numerique.sql"
+    ynh_die "Database schema file not found: $install_dir/sql/database_numerique.sql"
 fi
 
 #=================================================
@@ -171,7 +107,7 @@ fi
 #=================================================
 ynh_script_progression "Creating admin user..."
 
-hashed_password=$(php -r "echo password_hash('$admin_password', PASSWORD_DEFAULT);")
+hashed_password=$(php"$php_version" -r 'echo password_hash($argv[1], PASSWORD_DEFAULT);' "$admin_password")
 
 # Use prepared statement for security
 ynh_mysql_db_shell <<EOF
@@ -187,15 +123,10 @@ ynh_script_progression "Setting permissions..."
 chown -R "$app:www-data" "$install_dir"
 chmod -R 750 "$install_dir"
 
+chmod 400 "$install_dir/includes/database.php" "$install_dir/includes/config.php"
+chown "$app:$app" "$install_dir/includes/database.php" "$install_dir/includes/config.php"
+
 #=================================================
 # END OF SCRIPT
 #=================================================
-
-# Display database credentials for manual setup if needed
-ynh_print_warn "IMPORTANT: Si l'application vous demande de configurer la base de données, utilisez ces informations :"
-ynh_print_info "Hôte : localhost"
-ynh_print_info "Base de données : $db_name"
-ynh_print_info "Utilisateur : $db_user"
-ynh_print_info "Mot de passe : $db_pwd"
-
 ynh_script_progression "Installation of $app completed"

@@ -11,76 +11,7 @@ check_php_version
 #=================================================
 ynh_script_progression "Upgrading source files..."
 
-# Store current version for potential rollback
-old_version=$(ynh_app_setting_get --key=version)
-ynh_print_info "Upgrading from version: $old_version"
-
-# Check if it's already a git repo
-if [ -d "$install_dir/.git" ]; then
-    ynh_print_info "Updating via git pull..."
-    
-    pushd "$install_dir"
-    # Run git fetch and reset hard to force update and discard local changes (except ignored files like config.php)
-    sudo -u "$app" git fetch origin
-    sudo -u "$app" git reset --hard origin/main
-    popd
-else
-    ynh_print_info "Migrating to git installation..."
-    
-    # Create temp dir
-    tmp_dir=$(mktemp -d)
-    ynh_print_info "Using temp dir: $tmp_dir"
-    
-    # Backup configuration files
-    if [ -f "$install_dir/includes/database.php" ]; then
-        cp "$install_dir/includes/database.php" "$tmp_dir/database.php.backup"
-    else
-        ynh_print_warn "includes/database.php NOT found, skipping backup"
-    fi
-    
-    if [ -f "$install_dir/includes/config.php" ]; then
-        cp "$install_dir/includes/config.php" "$tmp_dir/config.php.backup"
-    else
-        ynh_print_warn "includes/config.php NOT found, skipping backup"
-    fi
-    
-    # Remove old files (except user data which should be in data_dir, but uploads are in install_dir/uploads usually?)
-    # Cleaning directory but preserving uploads if they are inside
-    restore_uploads=0
-    if [ -d "$install_dir/uploads" ] && [ ! -L "$install_dir/uploads" ]; then
-         mv "$install_dir/uploads" "$tmp_dir/uploads_backup"
-         restore_uploads=1
-    fi
-    
-    # Remove all content
-    rm -rf "$install_dir"/*
-    rm -rf "$install_dir"/.* 2>/dev/null
-    
-    # Clone
-    git clone "https://gitlab.com/anarchymedialibertaire-group/anarcosyndicalismebook.git" "$install_dir"
-    
-    # Restore config
-    mkdir -p "$install_dir/includes"
-    if [ -f "$tmp_dir/database.php.backup" ]; then
-        cp "$tmp_dir/database.php.backup" "$install_dir/includes/database.php"
-    fi
-    if [ -f "$tmp_dir/config.php.backup" ]; then
-        cp "$tmp_dir/config.php.backup" "$install_dir/includes/config.php"
-    fi
-    
-    # Restore uploads if needed
-    if [ "$restore_uploads" == "1" ]; then
-        rm -rf "$install_dir/uploads"
-        mv "$tmp_dir/uploads_backup" "$install_dir/uploads"
-    fi
-    
-    # Fix permissions immediately
-    chown -R "$app:$app" "$install_dir"
-    
-    # Cleanup temp dir
-    rm -rf "$tmp_dir"
-fi
-# ynh_setup_source --dest_dir="$install_dir" --keep="database.php" # Replaced by git logic
+ynh_setup_source --dest_dir="$install_dir" --full_replace=1
 
 #=================================================
 # UPGRADE COMPOSER DEPENDENCIES
@@ -106,6 +37,9 @@ ynh_script_progression "Upgrading system configurations..."
 ynh_config_add_phpfpm
 
 ynh_config_add_nginx
+
+# Remove the installer scripts for security
+rm -f "$install_dir/install.php" "$install_dir/install_app.php"
 
 #=================================================
 # ENSURE DATA DIRECTORIES EXIST
@@ -171,99 +105,8 @@ fi
 #=================================================
 ynh_script_progression "Updating configuration files..."
 
-# Retrieve database credentials (try v2.1 keys first, fallback to old keys)
-db_name=$(ynh_app_setting_get --key=db_name)
-db_user=$(ynh_app_setting_get --key=db_user)
-if [ -z "$db_user" ]; then
-  db_user=$(ynh_app_setting_get --key=mysql_user)
-fi
-
-db_pwd=$(ynh_app_setting_get --key=db_pwd)
-if [ -z "$db_pwd" ]; then
-  db_pwd=$(ynh_app_setting_get --key=mysql_pwd)
-fi
-
-# Retrieve admin user and email
-admin=$(ynh_app_setting_get --key=admin)
-admin_email=$(ynh_user_get_info --username="$admin" --key="mail")
-
-# Retrieve SMTP settings
-smtp_user=$(ynh_app_setting_get --key=smtp_user)
-
-# Define variables for new config placeholders
-contact_email=${contact_email:-"$admin_email"}
-if [ -n "$smtp_user" ]; then
-    smtp_from="$smtp_user"
-else
-    smtp_from="$admin_email"
-fi
-
-date=$(date +"%Y-%m-%d %H:%M:%S")
-
-# Create includes directory
-mkdir -p "$install_dir/includes"
-
-# Generate database.php in includes/
-ynh_config_add --template="database.php" --destination="$install_dir/includes/database.php"
-
-# Retrieve hCaptcha and SMTP keys from old config if present
-old_hcaptcha_site_key=""
-old_hcaptcha_secret_key=""
-old_smtp_host="127.0.0.1"
-old_smtp_port="25"
-old_smtp_user=""
-old_smtp_pass=""
-
-if [[ -f "$install_dir/includes/config.php" ]]; then
-    old_hcaptcha_site_key=$(grep "HCAPTCHA_SITE_KEY" "$install_dir/includes/config.php" | cut -d "'" -f 4)
-    old_hcaptcha_secret_key=$(grep "HCAPTCHA_SECRET_KEY" "$install_dir/includes/config.php" | cut -d "'" -f 4)
-    
-    # Extract SMTP settings
-    old_smtp_host=$(grep "SMTP_HOST" "$install_dir/includes/config.php" | cut -d "'" -f 4)
-    # Port might be integer (no quotes) or string
-    old_smtp_port=$(grep "SMTP_PORT" "$install_dir/includes/config.php" | sed "s/.*, *//;s/);//")
-    # Clean up port just in case
-    old_smtp_port=${old_smtp_port//\'/}
-    
-    old_smtp_user=$(grep "SMTP_USER" "$install_dir/includes/config.php" | cut -d "'" -f 4)
-    old_smtp_pass=$(grep "SMTP_PASS" "$install_dir/includes/config.php" | cut -d "'" -f 4)
-fi
-# Set defaults if extracting failed resulted in empty
-old_smtp_host=${old_smtp_host:-"127.0.0.1"}
-old_smtp_port=${old_smtp_port:-25}
-
-# Define smtp_pass to satisfy ynh_config_add placeholder replacement
-smtp_pass="$old_smtp_pass"
-
-# Generate config.php in includes/ to bypass installer
-ynh_config_add --template="config.php" --destination="$install_dir/includes/config.php"
-sed -i "s|__ADMIN_EMAIL__|$admin_email|g" "$install_dir/includes/config.php"
-sed -i "s|__DOMAIN__|$domain|g" "$install_dir/includes/config.php"
-clean_path=${path%/}
-sed -i "s|__PATH__|$clean_path|g" "$install_dir/includes/config.php"
-
-# Restore hCaptcha keys
-sed -i "s|__HCAPTCHA_SITE_KEY__|$old_hcaptcha_site_key|g" "$install_dir/includes/config.php"
-sed -i "s|__HCAPTCHA_SECRET_KEY__|$old_hcaptcha_secret_key|g" "$install_dir/includes/config.php"
-
-# Restore SMTP settings
-sed -i "s|__SMTP_HOST__|$old_smtp_host|g" "$install_dir/includes/config.php"
-sed -i "s|__SMTP_PORT__|$old_smtp_port|g" "$install_dir/includes/config.php"
-sed -i "s|__SMTP_USER__|$old_smtp_user|g" "$install_dir/includes/config.php"
-# __SMTP_PASS__ is handled by ynh_config_add because $smtp_pass is defined
-# sed -i "s|__SMTP_PASS__|$old_smtp_pass|g" "$install_dir/includes/config.php"
-# __DATE__ is handled by ynh_config_add because $date is defined
-
-# DEBUG: Check if files exist and are not empty
-ynh_print_info "DEBUG: Listing includes directory:"
-ls -la "$install_dir/includes/"
-
-# Display database credentials for manual setup if needed
-ynh_print_warn "IMPORTANT: Si l'application vous demande de configurer la base de données, utilisez ces informations :"
-ynh_print_info "Hôte : localhost"
-ynh_print_info "Base de données : $db_name"
-ynh_print_info "Utilisateur : $db_user"
-ynh_print_info "Mot de passe : $db_pwd"
+load_app_settings
+render_app_config
 
 #=================================================
 # SET PERMISSIONS
@@ -280,7 +123,7 @@ chmod -R 750 "$data_dir"
 # Set specific permissions for config files
 chmod 400 "$install_dir/includes/database.php"
 chown "$app:$app" "$install_dir/includes/database.php"
-chmod 644 "$install_dir/includes/config.php"
+chmod 400 "$install_dir/includes/config.php"
 chown "$app:$app" "$install_dir/includes/config.php"
 
 #=================================================
