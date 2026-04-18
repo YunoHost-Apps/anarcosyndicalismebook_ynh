@@ -45,7 +45,7 @@ Designed for collectives, associations, unions wishing to share texts, alternati
 - **Social & Sharing**: Social sharing (Mastodon, Bluesky, Telegram, etc.) and integrated Newsletter.
 - **Security**: 2FA protection, Passkeys (WebAuthn), and hCaptcha.
 
-**Shipped version:** 1.0.0~ynh20
+**Shipped version:** 1.0.0~ynh24
 
 **License:** MIT
 
