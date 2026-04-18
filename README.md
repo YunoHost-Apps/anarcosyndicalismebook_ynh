@@ -45,7 +45,7 @@ Conçu pour les collectifs, associations, syndicats souhaitant diffuser des text
 - **Partage & Social** : Partage social (Mastodon, Bluesky, Telegram, etc.) et Newsletter intégrée.
 - **Sécurité** : Protection 2FA, Passkeys (WebAuthn) et hCaptcha.
 
-**Version incluse :** 1.0.0~ynh20
+**Version incluse :** 1.0.0~ynh24
 
 **Licence :** MIT
 
