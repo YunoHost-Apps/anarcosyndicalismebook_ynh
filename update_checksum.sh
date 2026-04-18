@@ -9,11 +9,13 @@ MANIFEST_FILE="$SCRIPT_DIR/manifest.toml"
 
 # Extraire l'URL de la source principale depuis le manifest
 URL=$(awk '
-    /^\[resources\.sources\.main\]/ { in_main=1; next }
-    /^\[/ { in_main=0 }
-    in_main && $1 == "url" {
-        gsub(/"/, "", $3)
-        print $3
+    /^[[:space:]]*\[resources\.sources\.main\][[:space:]]*$/ { in_main=1; next }
+    /^[[:space:]]*\[/ { in_main=0 }
+    in_main && /^[[:space:]]*url[[:space:]]*=/ {
+        line=$0
+        sub(/^[[:space:]]*url[[:space:]]*=[[:space:]]*"/, "", line)
+        sub(/".*$/, "", line)
+        print line
         exit
     }
 ' "$MANIFEST_FILE")
@@ -38,11 +40,13 @@ echo "🔑 Nouveau SHA256: $NEW_SHA"
 
 # Obtenir l'ancien checksum
 OLD_SHA=$(awk '
-    /^\[resources\.sources\.main\]/ { in_main=1; next }
-    /^\[/ { in_main=0 }
-    in_main && $1 == "sha256" {
-        gsub(/"/, "", $3)
-        print $3
+    /^[[:space:]]*\[resources\.sources\.main\][[:space:]]*$/ { in_main=1; next }
+    /^[[:space:]]*\[/ { in_main=0 }
+    in_main && /^[[:space:]]*sha256[[:space:]]*=/ {
+        line=$0
+        sub(/^[[:space:]]*sha256[[:space:]]*=[[:space:]]*"/, "", line)
+        sub(/".*$/, "", line)
+        print line
         exit
     }
 ' "$MANIFEST_FILE")

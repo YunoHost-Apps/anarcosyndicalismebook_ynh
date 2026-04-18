@@ -22,8 +22,8 @@ update_checksum:
     - git config --global user.name "GitLab CI"
   script:
     - echo "📥 Lecture de l'URL de source depuis ${MANIFEST_FILE}..."
-    - SOURCE_URL=$(awk '/^\[resources\.sources\.main\]/ { in_main=1; next } /^\[/ { in_main=0 } in_main && $1 == "url" { gsub(/"/, "", $3); print $3; exit }' "$MANIFEST_FILE")
-    - OLD_SHA=$(awk '/^\[resources\.sources\.main\]/ { in_main=1; next } /^\[/ { in_main=0 } in_main && $1 == "sha256" { gsub(/"/, "", $3); print $3; exit }' "$MANIFEST_FILE")
+    - SOURCE_URL=$(awk '/^[[:space:]]*\[resources\.sources\.main\][[:space:]]*$/ { in_main=1; next } /^[[:space:]]*\[/ { in_main=0 } in_main && /^[[:space:]]*url[[:space:]]*=/ { line=$0; sub(/^[[:space:]]*url[[:space:]]*=[[:space:]]*"/, "", line); sub(/".*$/, "", line); print line; exit }' "$MANIFEST_FILE")
+    - OLD_SHA=$(awk '/^[[:space:]]*\[resources\.sources\.main\][[:space:]]*$/ { in_main=1; next } /^[[:space:]]*\[/ { in_main=0 } in_main && /^[[:space:]]*sha256[[:space:]]*=/ { line=$0; sub(/^[[:space:]]*sha256[[:space:]]*=[[:space:]]*"/, "", line); sub(/".*$/, "", line); print line; exit }' "$MANIFEST_FILE")
     - test -n "$SOURCE_URL"
     - test -n "$OLD_SHA"
     - echo "📥 Téléchargement et calcul du checksum..."
