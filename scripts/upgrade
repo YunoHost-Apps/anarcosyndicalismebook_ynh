@@ -117,6 +117,8 @@ mkdir -p "$data_dir/uploads/auteurs"
 mkdir -p "$data_dir/uploads/textes"
 mkdir -p "$data_dir/uploads/avatars"
 mkdir -p "$data_dir/backups"
+mkdir -p "$data_dir/logs"
+mkdir -p "$data_dir/releases"
 
 #=================================================
 # RESTORE SYMLINKS
@@ -130,10 +132,23 @@ fi
 if [[ -e "$install_dir/backups" ]]; then
     rm -rf "$install_dir/backups"
 fi
+if [[ -e "$install_dir/logs" ]]; then
+    rm -rf "$install_dir/logs"
+fi
+if [[ -e "$install_dir/releases" ]]; then
+    rm -rf "$install_dir/releases"
+fi
 
 # Create symlinks
 ln -sf "$data_dir/uploads" "$install_dir/uploads"
 ln -sf "$data_dir/backups" "$install_dir/backups"
+ln -sf "$data_dir/logs" "$install_dir/logs"
+ln -sf "$data_dir/releases" "$install_dir/releases"
+
+# Create temp migration directory
+mkdir -p "$install_dir/api/temp_migration"
+chown "$app:www-data" "$install_dir/api/temp_migration"
+chmod 775 "$install_dir/api/temp_migration"
 
 # Verify symlinks were created successfully
 if [[ ! -L "$install_dir/uploads" ]] || [[ ! -L "$install_dir/backups" ]]; then
