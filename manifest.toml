@@ -7,7 +7,7 @@ name = "AnarcosyndicalismeBOOK"
 description.en = "Digital library CMS for sharing texts, PDFs and EPUBs"
 description.fr = "CMS de bibliothèque numérique pour partager textes, PDF et EPUB"
 
-version = "1.0.0~ynh23"
+version = "1.0.0~ynh24"
 
 maintainers = ["YunoHost Community"]
 
@@ -109,7 +109,7 @@ ram.runtime = "128M"
     admin.allowed = "admins"
 
     [resources.apt]
-    packages = "git, mariadb-server, php-cli, php-fpm, php-mysql, php-curl, php-mbstring, php-sqlite3, php-xml, php-gd, php-zip"
+    packages = "git, mariadb-server, sqlite3, php-cli, php-fpm, php-mysql, php-curl, php-mbstring, php-xml, php-gd, php-zip"
 
     [resources.database]
     type = "mysql"
