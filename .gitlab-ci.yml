@@ -5,7 +5,7 @@ stages:
   - update
 
 variables:
-  SOURCE_URL: "https://gitlab.com/anarchymedialibertaire-group/anarcosyndicalismebook/-/archive/main/anarcosyndicalismebook-main.tar.gz"
+  MANIFEST_FILE: "manifest.toml"
 
 update_checksum:
   stage: update
@@ -21,16 +21,20 @@ update_checksum:
     - git config --global user.email "ci@gitlab.com"
     - git config --global user.name "GitLab CI"
   script:
+    - echo "📥 Lecture de l'URL de source depuis ${MANIFEST_FILE}..."
+    - SOURCE_URL=$(awk '/^\[resources\.sources\.main\]/ { in_main=1; next } /^\[/ { in_main=0 } in_main && $1 == "url" { gsub(/"/, "", $3); print $3; exit }' "$MANIFEST_FILE")
+    - OLD_SHA=$(awk '/^\[resources\.sources\.main\]/ { in_main=1; next } /^\[/ { in_main=0 } in_main && $1 == "sha256" { gsub(/"/, "", $3); print $3; exit }' "$MANIFEST_FILE")
+    - test -n "$SOURCE_URL"
+    - test -n "$OLD_SHA"
     - echo "📥 Téléchargement et calcul du checksum..."
     - NEW_SHA=$(curl -sL "$SOURCE_URL" | sha256sum | cut -d' ' -f1)
-    - OLD_SHA=$(sed -n 's/.*sha256 = "\([^"]*\)".*/\1/p' manifest.toml | head -1)
     - echo "Ancien SHA256 = $OLD_SHA"
     - echo "Nouveau SHA256 = $NEW_SHA"
     - |
       if [ "$NEW_SHA" != "$OLD_SHA" ]; then
         echo "🔄 Mise à jour du manifest..."
-        sed -i "s/sha256 = \"$OLD_SHA\"/sha256 = \"$NEW_SHA\"/" manifest.toml
-        git add manifest.toml
+        sed -i "s/sha256 = \"$OLD_SHA\"/sha256 = \"$NEW_SHA\"/" "$MANIFEST_FILE"
+        git add "$MANIFEST_FILE"
         git commit -m "🔄 Auto-update source checksum"
         if [ -z "$CI_PUSH_TOKEN" ]; then
           echo "❌ Erreur: La variable CI_PUSH_TOKEN est vide !"

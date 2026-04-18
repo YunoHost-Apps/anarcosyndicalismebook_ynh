@@ -3,6 +3,8 @@
 source _common.sh
 source /usr/share/yunohost/helpers
 
+detect_php_version || ynh_die "Unable to detect the PHP version for change_url"
+
 #=================================================
 # MODIFY URL IN NGINX CONF
 #=================================================

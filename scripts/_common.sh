@@ -4,18 +4,41 @@
 # COMMON VARIABLES AND CUSTOM HELPERS
 #=================================================
 
-php_version="8.2"
+php_version=""
 composer_version="2.8.3"
 
 #=================================================
 # CUSTOM HELPERS
 #=================================================
 
+# Detect the active PHP major.minor version used by the system/app
+detect_php_version() {
+    if [ -n "$php_version" ]; then
+        return 0
+    fi
+
+    php_version=$(ynh_app_setting_get --key=php_version 2>/dev/null || true)
+
+    if [ -z "$php_version" ] && command -v php >/dev/null 2>&1; then
+        php_version=$(php -r 'echo PHP_MAJOR_VERSION . "." . PHP_MINOR_VERSION;' 2>/dev/null || true)
+    fi
+
+    if [ -z "$php_version" ] && [ -d /etc/php ]; then
+        php_version=$(find /etc/php -mindepth 1 -maxdepth 1 -type d -printf '%f\n' | sort -V | tail -n 1)
+    fi
+
+    [ -n "$php_version" ]
+}
+
 # Check if PHP version is available
 check_php_version() {
+    detect_php_version || ynh_die "Unable to detect an available PHP version on this system"
+
     if ! command -v "php$php_version" &> /dev/null; then
         ynh_die "PHP $php_version is not available on this system"
     fi
+
+    ynh_app_setting_set --key=php_version --value="$php_version"
 }
 
 normalize_site_path() {

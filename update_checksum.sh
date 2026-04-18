@@ -7,8 +7,16 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 MANIFEST_FILE="$SCRIPT_DIR/manifest.toml"
 
-# Extraire l'URL depuis le manifest
-URL=$(grep -oP 'url = "\K[^"]+' "$MANIFEST_FILE" | head -1)
+# Extraire l'URL de la source principale depuis le manifest
+URL=$(awk '
+    /^\[resources\.sources\.main\]/ { in_main=1; next }
+    /^\[/ { in_main=0 }
+    in_main && $1 == "url" {
+        gsub(/"/, "", $3)
+        print $3
+        exit
+    }
+' "$MANIFEST_FILE")
 
 if [ -z "$URL" ]; then
     echo "❌ Erreur: Impossible de trouver l'URL dans manifest.toml"
@@ -29,7 +37,15 @@ fi
 echo "🔑 Nouveau SHA256: $NEW_SHA"
 
 # Obtenir l'ancien checksum
-OLD_SHA=$(grep -oP 'sha256 = "\K[^"]+' "$MANIFEST_FILE" | head -1)
+OLD_SHA=$(awk '
+    /^\[resources\.sources\.main\]/ { in_main=1; next }
+    /^\[/ { in_main=0 }
+    in_main && $1 == "sha256" {
+        gsub(/"/, "", $3)
+        print $3
+        exit
+    }
+' "$MANIFEST_FILE")
 echo "📋 Ancien SHA256:  $OLD_SHA"
 
 if [ "$NEW_SHA" = "$OLD_SHA" ]; then
