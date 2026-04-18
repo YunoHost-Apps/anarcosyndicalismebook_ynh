@@ -1,6 +1,5 @@
-# AnarcosyndicalismeBOOK
 
-AnarcosyndicalismeBOOK is a specialized digital library CMS designed for sharing activist and alternative documents.
+AnarcosyndicalismeBOOK is a specialized digital library CMS designed for sharing activist libertarian  documents.
 
 ### Core Features:
 

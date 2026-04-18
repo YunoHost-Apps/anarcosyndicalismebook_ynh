@@ -1,6 +1,4 @@
-# AnarcosyndicalismeBOOK
-
-AnarcosyndicalismeBOOK est un CMS de bibliothèque numérique spécialisé pour le partage de documents militants et alternatifs.
+AnarcosyndicalismeBOOK est un CMS de bibliothèque numérique spécialisé pour le partage de documents militants libertaires.
 
 ### Fonctionnalités principales :
 
