@@ -30,22 +30,22 @@ AnarcosyndicalismeBOOK est un CMS de bibliothèque numérique permettant de cré
 
 Conçu pour les collectifs, associations, syndicats souhaitant diffuser des textes, les bibliothèques numériques militantes ou alternatives, et les projets d'archivage et de partage de documents.
 
-### Fonctionnalités
+### Fonctionnalités principales
 
-- Lecture en ligne de PDF et EPUB avec mode plein écran
-- Upload et gestion de fichiers (TXT, PDF, EPUB)
-- Import en masse par drag & drop
-- Import depuis Calibre (metadata.db ou serveur OPDS)
-- Recherche par titre, auteur, contenu
-- Organisation par catégories thématiques
-- Favoris et liste de lecture personnelle
-- **Authentification sécurisée (2FA/TOTP)**
-- Flux RSS et sitemap XML dynamique
-- PWA installable avec mode hors-ligne
-- Widget d'accessibilité complet
-- Partage social (Mastodon, Bluesky, Telegram, etc.)
+- **Lecture intégrée** : Lecture en ligne de PDF et EPUB avec mode plein écran et interface tactile mobile.
+- **Gestion de fichiers** : Upload et gestion de fichiers (TXT, PDF, EPUB).
+- **Import massif** : Import en masse par drag & drop et gestion des métadonnées.
+- **Migration Universelle** : Import intelligent depuis **Ghost CMS**, WordPress ou n'importe quel flux **RSS/Atom**.
+- **Import Calibre** : Synchronisation avec Calibre ou Wikisource (metadata.db ou serveur OPDS).
+- **Recherche avancée** : Recherche par titre, auteur et contenu.
+- **Organisation** : Catégories thématiques, Favoris et liste de lecture personnelle.
+- **Flux & SEO** : Flux RSS, OPDS, et sitemap XML dynamique pour le référencement.
+- **PWA** : Application web installable avec mode hors-ligne complet.
+- **Accessibilité** : Widget d'accessibilité complet intégré (handicaps visuels, dyslexie).
+- **Partage & Social** : Partage social (Mastodon, Bluesky, Telegram, etc.) et Newsletter intégrée.
+- **Sécurité** : Protection 2FA, Passkeys (WebAuthn) et hCaptcha.
 
-**Version incluse :** 1.0.0~ynh19
+**Version incluse :** 1.0.0~ynh20
 
 **Licence :** MIT
 

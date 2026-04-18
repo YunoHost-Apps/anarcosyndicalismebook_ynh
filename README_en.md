@@ -30,21 +30,22 @@ AnarcosyndicalismeBOOK is a digital library CMS for creating and managing an onl
 
 Designed for collectives, associations, unions wishing to share texts, alternative or activist digital libraries, and archiving and document sharing projects.
 
-### Features
+### Core Features
 
-- Online PDF and EPUB reader with fullscreen mode
-- File upload and management (TXT, PDF, EPUB)
-- Bulk import via drag & drop
-- Import from Calibre (metadata.db or OPDS server)
-- Search by title, author, content
-- Thematic categories organization
-- Favorites and personal reading list
-- RSS feed and dynamic XML sitemap
-- Installable PWA with offline mode
-- Complete accessibility widget
-- Social sharing (Mastodon, Bluesky, Telegram, etc.)
+- **Integrated Reader**: Online reading of PDF and EPUB with full-screen mode and mobile touch interface.
+- **File Management**: Upload and manage files (TXT, PDF, EPUB).
+- **Mass Import**: Bulk import via drag & drop and metadata management.
+- **Universal Migration**: Intelligent import from **Ghost CMS**, WordPress, or any **RSS/Atom** feed.
+- **Calibre Sync**: Synchronize with Calibre or Wikisource (metadata.db or OPDS server).
+- **Advanced Search**: Search by title, author, and content.
+- **Organization**: Thematic categories, Favorites, and personal reading list.
+- **Feeds & SEO**: RSS feeds, OPDS, and dynamic XML sitemap for better ranking.
+- **PWA**: Installable web app with full offline mode.
+- **Accessibility**: Comprehensive built-in accessibility widget (visual impairments, dyslexia).
+- **Social & Sharing**: Social sharing (Mastodon, Bluesky, Telegram, etc.) and integrated Newsletter.
+- **Security**: 2FA protection, Passkeys (WebAuthn), and hCaptcha.
 
-**Shipped version:** 1.0.0~ynh1
+**Shipped version:** 1.0.0~ynh20
 
 **License:** MIT
 

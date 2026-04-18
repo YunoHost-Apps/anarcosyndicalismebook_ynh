@@ -1,28 +1,35 @@
-## Administration
+# Administration
 
-L'interface d'administration est accessible à `https://votre-domaine.tld/chemin/admin/`
+L'interface d'administration est accessible à `https://votre-domaine.tld/admin/` (ou le chemin personnalisé choisi lors de l'installation).
 
 ### Compte administrateur
 
-Le compte administrateur est créé automatiquement lors de l'installation avec l'utilisateur YunoHost sélectionné.
+Le compte administrateur est créé automatiquement lors de l'installation. Utilisez l'email et le mot de passe définis dans le formulaire d'installation de YunoHost.
 
-### Fonctionnalités admin
+### Menus de l'interface
 
-- **Dashboard** — Statistiques et aperçu
-- **Textes** — Gestion des textes, PDF et EPUB
-- **Import en masse** — Drag & drop pour importer plusieurs fichiers
-- **Import Calibre** — Depuis metadata.db ou serveur OPDS
-- **Auteurs** — Gestion avec photos
-- **Catégories** — Organisation thématique
-- **Utilisateurs** — Gestion des comptes
-- **Pages** — Éditeur WYSIWYG
-- **Menus** — Gestion de la navigation
-- **Paramètres** — Personnalisation du site
+- **Dashboard** — Statistiques de lecture et état général du site.
+- **Textes** — Gestion complète des textes, PDF et EPUB.
+- **Auteurs** — Gestion des auteur·ices avec photos de profil.
+- **Catégories** — Organisation thématique de la bibliothèque.
+- **Utilisateurs** — Gestion des comptes, des rôles et des accès.
+- **Pages** — Éditeur WYSIWYG pour les pages statiques (À propos, Mentions légales, etc.).
+- **Menus** — Gestion dynamique de la barre de navigation.
+- **Importation Universelle** — Migration complète depuis **Ghost CMS**, WordPress ou flux **RSS/Atom**.
+- **Import en masse** — Drag & drop pour importer plusieurs fichiers simultanément.
+- **Import Calibre** — Synchronisation via `metadata.db` ou serveur OPDS.
+- **Newsletter** — Système complet d'envoi et gestion des abonnés aux couleurs du projet.
+- **Auto-publication** — Configuration de la publication automatique vers Mastodon, Bluesky, Facebook, etc.
+- **Paramètres** — Personnalisation du site (Titre, SEO, Couleurs, Logos).
+- **Diagnostics** — Vérification de l'état de la base de données et des fichiers système.
+- **Mises à jour** — Vérification et installation des nouvelles versions depuis GitLab.
 
 ### Sauvegardes
 
-Les sauvegardes sont gérées automatiquement par YunoHost. Les données utilisateur (uploads, fichiers) sont stockées dans `/home/yunohost.app/anarchosyndicalismebook/`.
+Les sauvegardes sont gérées par le système natif de YunoHost. Les données (uploads, backups BDD, fichiers PHP) sont stockées de manière persistante.
 
-### Logs
+### Logs (Journaux d'erreurs)
 
-Les logs PHP sont disponibles dans `/var/log/php/fpm-anarchosyndicalismebook.log`
+L'application dispose désormais d'un système de log interne pour le débugage et les migrations :
+- **Logs Applicatifs** : `/home/yunohost.app/anarchosyndicalismebook/logs/error.log`
+- **Logs Système (FPM)** : `/var/log/php8.2-fpm-anarchosyndicalismebook.log`

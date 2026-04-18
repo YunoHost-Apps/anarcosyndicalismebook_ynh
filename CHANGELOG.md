@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.20~ynh1] - 2026-04-18
+- **App Update** : Mise à jour vers le cœur v1.2.56.
+- **Migration** : Support Ghost CMS et flux RSS/Atom activé.
+- **Système** : Ajout des dossiers logs et migration automatique.
+- **Dépendances** : Installation de php-gd et php-zip incluse.
+
 ## [1.0.0~ynh19] - 2025-12-18
 
 ### Corrigé
