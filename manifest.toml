@@ -93,7 +93,7 @@ ram.runtime = "128M"
 [resources]
     [resources.sources.main]
     url = "https://gitlab.com/anarchymedialibertaire-group/anarcosyndicalismebook/-/archive/main/anarcosyndicalismebook-main.tar.gz"
-    sha256 = "a4c67aed24ae573b15da4ff4fcbbfc7793d9f9b613331e06cc96d63e4424c432"
+    sha256 = "b41b525c1e7bc3131a6f721d8181fe4df9dee1f4834c37cae8cd00bab69f7f51"
     autoupdate.strategy = "latest_gitlab_tag"
     autoupdate.upstream = "https://gitlab.com/anarchymedialibertaire-group/anarcosyndicalismebook"
 
