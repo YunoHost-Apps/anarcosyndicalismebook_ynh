@@ -1,9 +1,19 @@
 #!/bin/bash
 
-source _common.sh
 source /usr/share/yunohost/helpers
 
-detect_php_version || ynh_die "Unable to detect the PHP version for restore"
+# Retrieve PHP version from app settings (set during install/upgrade)
+php_version=$(ynh_app_setting_get --key=php_version)
+if [ -z "$php_version" ]; then
+    # Fallback: detect from system
+    if command -v php > /dev/null 2>&1; then
+        php_version=$(php -r 'echo PHP_MAJOR_VERSION . "." . PHP_MINOR_VERSION;' 2>/dev/null || true)
+    fi
+    if [ -z "$php_version" ] && [ -d /etc/php ]; then
+        php_version=$(find /etc/php -mindepth 1 -maxdepth 1 -type d -printf '%f\n' | sort -V | tail -n 1)
+    fi
+fi
+[ -n "$php_version" ] || ynh_die "Unable to detect the PHP version for restore"
 
 #=================================================
 # RESTORE THE APP MAIN DIR
