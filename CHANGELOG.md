@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.21~ynh1] - 2026-07-31
+- **App Update** : Mise à jour vers le cœur v1.2.87.
+- **Journaux d'erreurs (Logs)** : Détection dynamique de l'isolation `open_basedir` sous YunoHost/Nginx, priorisation du journal applicatif local (`../logs/error.log`) et message guidé pour l'inspection SSH des logs `/var/log/`.
+- **Import OPDS / Calibre** : Prise en charge des redirections cURL HTTP 301/302 sous `open_basedir`, support des flux d'acquisition OPDS (*The Anarchist Library*, etc.), multi-auteurs et namespaces Dublin Core.
+- **Import metadata.db Natively** : Utilisation de l'extension native PHP `PDO_SQLite` éliminant la dépendance au binaire `sqlite3` CLI.
+
 ## [1.0.20~ynh1] - 2026-04-18
 - **App Update** : Mise à jour vers le cœur v1.2.56.
 - **Migration** : Support Ghost CMS et flux RSS/Atom activé.
