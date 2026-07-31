@@ -115,6 +115,10 @@ ynh_script_progression "Checking for database updates..."
 # Check if there are any database migration scripts to run
 if [[ -f "$install_dir/sql/migrations.sql" ]]; then
     ynh_print_info "Running database migrations..."
+    # S'assurer que la colonne 'actif' existe sur les anciennes installations YunoHost
+    ynh_mysql_db_shell <<EOF || true
+ALTER TABLE \`menu\` ADD COLUMN IF NOT EXISTS \`actif\` tinyint(1) NOT NULL DEFAULT 1;
+EOF
     ynh_mysql_db_shell < "$install_dir/sql/migrations.sql"
 fi
 
