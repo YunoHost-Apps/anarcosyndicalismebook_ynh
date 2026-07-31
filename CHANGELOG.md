@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.0.22~ynh1] - 2026-07-31
+- **App Update** : Mise à jour vers le cœur v1.2.88.
+- **Import OPDS / Calibre (Correctif 404)** : Résolution robuste des URL relatives OPDS (`resolveOpdsUrl`) empêchant toute troncature du chemin `/opds/`.
+- **Navigation automatique d'index OPDS** : Exploration automatique des sous-catalogues de rubriques si aucun livre direct n'est présent sur le flux d'accueil.
+
 ## [1.0.21~ynh1] - 2026-07-31
 - **App Update** : Mise à jour vers le cœur v1.2.87.
 - **Journaux d'erreurs (Logs)** : Détection dynamique de l'isolation `open_basedir` sous YunoHost/Nginx, priorisation du journal applicatif local (`../logs/error.log`) et message guidé pour l'inspection SSH des logs `/var/log/`.
