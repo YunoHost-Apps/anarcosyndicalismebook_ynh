@@ -43,9 +43,9 @@ Conçu pour les collectifs, associations, syndicats souhaitant diffuser des text
 - **PWA** : Application web installable avec mode hors-ligne complet.
 - **Accessibilité** : Widget d'accessibilité complet intégré (handicaps visuels, dyslexie).
 - **Partage & Social** : Partage social (Mastodon, Bluesky, Telegram, etc.) et Newsletter intégrée.
-- **Sécurité** : Protection 2FA, Passkeys (WebAuthn) et hCaptcha.
+- **Sécurité** : Protection 2FA, Passkeys (WebAuthn) et protection anti-robot autonome CAP.
 
-**Version incluse :** 1.0.0~ynh24
+**Version incluse :** 1.0.0~ynh26
 
 **Licence :** MIT
 
@@ -84,7 +84,7 @@ Après l'installation, vous pouvez vous connecter à l'interface d'administratio
 - **Email** : L'adresse email associée au compte administrateur YunoHost que vous avez choisi lors de l'installation (par exemple : `admin@votre-domaine.tld`).
 - **Mot de passe** : Le mot de passe administrateur que vous avez défini lors de l'installation (champ "admin_password").
 
-## Configuration hCaptcha
+## Configuration CAP (Anti-robot autonome)
 
-Si vous souhaitez utiliser hCaptcha pour protéger votre site, vous pouvez renseigner les clés lors de l'installation. Sinon, laissez les champs vides.
-Pour obtenir des clés, inscrivez-vous sur [hCaptcha.com](https://www.hcaptcha.com/).
+Le CMS utilise **CAP** (anti-robot open source, 100 % respectueux de la vie privée, sans tracking ni cookies).
+Si vous disposez d'une instance CAP (locale ou distante), vous pouvez renseigner l'URL et les clés lors de l'installation ou plus tard dans **Admin > Paramètres > Protection Anti-robot (CAP)**. Sinon, laissez les champs vides (le captcha reste optionnel et désactivable en 1 clic).

@@ -43,9 +43,9 @@ Designed for collectives, associations, unions wishing to share texts, alternati
 - **PWA**: Installable web app with full offline mode.
 - **Accessibility**: Comprehensive built-in accessibility widget (visual impairments, dyslexia).
 - **Social & Sharing**: Social sharing (Mastodon, Bluesky, Telegram, etc.) and integrated Newsletter.
-- **Security**: 2FA protection, Passkeys (WebAuthn), and hCaptcha.
+- **Security**: 2FA protection, Passkeys (WebAuthn), and CAP autonomous anti-bot protection.
 
-**Shipped version:** 1.0.0~ynh24
+**Shipped version:** 1.0.0~ynh26
 
 **License:** MIT
 
@@ -76,3 +76,16 @@ sudo yunohost app upgrade anarchosyndicalismebook -u https://gitlab.com/anarchym
 ```
 
 **More info regarding app packaging:** <https://yunohost.org/packaging_apps>
+
+## First login
+
+Installation is fully automatic. An admin account is created during setup.
+
+After install, log in with:
+- **Email**: The email address of the YunoHost admin user you chose during install.
+- **Password**: The password you entered in the "admin_password" field.
+
+## CAP Anti-Bot Configuration
+
+The CMS embeds **CAP** (open-source, privacy-first, zero-tracking, zero cookies).
+If you have a CAP instance (local or remote), you can set its URL and keys during install or in **Admin > Settings > Anti-bot Protection (CAP)**. Otherwise, leave fields empty.

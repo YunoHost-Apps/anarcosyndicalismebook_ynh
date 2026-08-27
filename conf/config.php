@@ -9,5 +9,6 @@ define('SMTP_FROM_NAME', 'AnarcosyndicalismeBOOK');
 define('CONTACT_EMAIL', '__CONTACT_EMAIL__');
 define('SITE_NAME', 'AnarcosyndicalismeBOOK');
 define('SITE_URL', '__SITE_URL__');
-define('HCAPTCHA_SITE_KEY', '__HCAPTCHA_SITE_KEY__');
-define('HCAPTCHA_SECRET_KEY', '__HCAPTCHA_SECRET_KEY__');
+define('CAP_URL', '__CAP_URL__');
+define('CAP_SITE_KEY', '__CAP_SITE_KEY__');
+define('CAP_SECRET_KEY', '__CAP_SECRET_KEY__');

@@ -46,16 +46,23 @@ ram.runtime = "128M"
     [install.admin_password]
     type = "password"
 
-    [install.hcaptcha_site_key]
+    [install.cap_url]
     type = "string"
-    ask.en = "hCaptcha Site Key (optional)"
-    ask.fr = "Clé du site hCaptcha (facultatif)"
+    ask.en = "CAP Instance URL (e.g., http://127.0.0.1:3000 or https://cap.domain.org - optional)"
+    ask.fr = "URL de l'instance CAP (ex: http://127.0.0.1:3000 ou https://cap.domaine.org - facultatif)"
+    default = "http://127.0.0.1:3000"
     optional = true
 
-    [install.hcaptcha_secret_key]
+    [install.cap_site_key]
     type = "string"
-    ask.en = "hCaptcha Secret Key (optional)"
-    ask.fr = "Clé secrète hCaptcha (facultatif)"
+    ask.en = "CAP Site Key (optional)"
+    ask.fr = "Clé de site CAP (facultatif)"
+    optional = true
+
+    [install.cap_secret_key]
+    type = "string"
+    ask.en = "CAP Secret Key (optional)"
+    ask.fr = "Clé secrète CAP (facultatif)"
     optional = true
 
     [install.smtp_host]

@@ -82,10 +82,10 @@ load_app_settings() {
         admin=$(ynh_app_setting_get --key=admin)
     fi
 
-    admin_email=$(ynh_user_get_info --username="$admin" --key="mail")
-
-    hcaptcha_site_key=${hcaptcha_site_key:-$(ynh_app_setting_get --key=hcaptcha_site_key)}
-    hcaptcha_secret_key=${hcaptcha_secret_key:-$(ynh_app_setting_get --key=hcaptcha_secret_key)}
+    cap_url=${cap_url:-$(ynh_app_setting_get --key=cap_url)}
+    cap_site_key=${cap_site_key:-$(ynh_app_setting_get --key=cap_site_key)}
+    cap_secret_key=${cap_secret_key:-$(ynh_app_setting_get --key=cap_secret_key)}
+    cap_url=${cap_url:-"http://127.0.0.1:3000"}
     smtp_host=${smtp_host:-$(ynh_app_setting_get --key=smtp_host)}
     smtp_port=${smtp_port:-$(ynh_app_setting_get --key=smtp_port)}
     smtp_user=${smtp_user:-$(ynh_app_setting_get --key=smtp_user)}
@@ -122,8 +122,9 @@ render_app_config() {
     SMTP_FROM=$(php_escape "$smtp_from")
     CONTACT_EMAIL=$(php_escape "$contact_email")
     SITE_URL=$(php_escape "$site_url")
-    HCAPTCHA_SITE_KEY=$(php_escape "$hcaptcha_site_key")
-    HCAPTCHA_SECRET_KEY=$(php_escape "$hcaptcha_secret_key")
+    CAP_URL=$(php_escape "$cap_url")
+    CAP_SITE_KEY=$(php_escape "$cap_site_key")
+    CAP_SECRET_KEY=$(php_escape "$cap_secret_key")
 
     mkdir -p "$install_dir/includes"
 
