@@ -7,7 +7,7 @@ name = "AnarcosyndicalismeBOOK"
 description.en = "Digital library CMS for sharing texts, PDFs and EPUBs"
 description.fr = "CMS de bibliothèque numérique pour partager textes, PDF et EPUB"
 
-version = "1.0.0~ynh26"
+version = "1.3.0~beta1~ynh1"
 
 maintainers = ["YunoHost Community"]
 
@@ -99,8 +99,8 @@ ram.runtime = "128M"
 
 [resources]
     [resources.sources.main]
-    url = "https://gitlab.com/anarchymedialibertaire-group/anarcosyndicalismebook/-/archive/main/anarcosyndicalismebook-main.tar.gz"
-    sha256 = "3236cfbae204e02a0721de5de2e91fccd69e5a1b5be3f36be3a1d1f3fbdc77e8"
+    url = "https://gitlab.com/anarchymedialibertaire-group/anarcosyndicalismebook/-/archive/v1.3.0-beta.1/anarcosyndicalismebook-v1.3.0-beta.1.tar.gz"
+    sha256 = "d2966910b58d7183f22c9372f347b4039a5def955c9a63ab5a18114e43bcb78a"
     autoupdate.strategy = "latest_gitlab_tag"
     autoupdate.upstream = "https://gitlab.com/anarchymedialibertaire-group/anarcosyndicalismebook"
 
