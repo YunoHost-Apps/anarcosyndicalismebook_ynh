@@ -9,7 +9,7 @@ It shall NOT be edited by hand.
 </h1>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.0.0-blue?style=for-the-badge" alt="Version 1.0.0">
+  <img src="https://img.shields.io/badge/version-1.3.0-blue?style=for-the-badge" alt="Version 1.3.0">
   <img src="https://img.shields.io/badge/YunoHost-11.2+-41b883?style=for-the-badge&logo=yunohost&logoColor=white" alt="YunoHost 11.2+">
   <img src="https://img.shields.io/badge/PHP-8.2-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP 8.2">
   <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="MIT">
@@ -45,7 +45,7 @@ Designed for collectives, associations, unions wishing to share texts, alternati
 - **Social & Sharing**: Social sharing (Mastodon, Bluesky, Telegram, etc.) and integrated Newsletter.
 - **Security**: 2FA protection, Passkeys (WebAuthn), and CAP autonomous anti-bot protection.
 
-**Shipped version:** 1.0.0~ynh26
+**Shipped version:** 1.3.0~ynh1 (AnarcosyndicalismeBOOK v1.3.0-beta.1)
 
 **License:** MIT
 

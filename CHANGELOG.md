@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.3.0~ynh1] - 2026-08-27
+- **Mise à jour majeure du cœur** : Passage à AnarcosyndicalismeBOOK `v1.3.0-beta.1`.
+- **Intégration CAPTCHA CAP autonome** : Migration complète vers l'alternative éthique et libre CAP (Proof of Work + WebAssembly ultra-rapide) avec support d'instance personnalisée (`CAP_URL`, `CAP_SITE_KEY`, `CAP_SECRET_KEY`).
+- **Routage Nginx & URLs propres** : Correction des erreurs 404 avec réécriture automatique vers les fichiers `.php` et gestion des slugs `/lire/`, `/auteur/`, `/categorie/`, `/page/`.
+- **Support WebAssembly** : Ajout du support des fichiers `.wasm` sous Nginx pour l'exécution fluide du solveur client.
+- **Multilinguisme & Protections** : Intégration des dictionnaires 42 langues et du formulaire public `/soumettre`.
+- **Correction d'installation** : Résolution automatique de l'email de l'administrateur via `ynh_user_get_info` pour éviter les erreurs de variable non définie.
+
 ## [1.0.22~ynh1] - 2026-07-31
 - **App Update** : Mise à jour vers le cœur v1.2.88.
 - **Import OPDS / Calibre (Correctif 404)** : Résolution robuste des URL relatives OPDS (`resolveOpdsUrl`) empêchant toute troncature du chemin `/opds/`.
