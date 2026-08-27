@@ -126,6 +126,11 @@ fi
 #=================================================
 ynh_script_progression "Creating admin user..."
 
+if [ -z "${admin_email:-}" ]; then
+    admin_email=$(ynh_user_get_info --username="$admin" --key=mail 2>/dev/null || ynh_user_get_info --username="$admin" --key=email 2>/dev/null || true)
+    admin_email="${admin_email:-${admin}@${domain}}"
+fi
+
 hashed_password=$(php"$php_version" -r 'echo password_hash($argv[1], PASSWORD_DEFAULT);' "$admin_password")
 
 # Use prepared statement for security

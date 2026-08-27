@@ -79,8 +79,17 @@ load_app_settings() {
     fi
 
     if [ -z "${admin:-}" ]; then
-        admin=$(ynh_app_setting_get --key=admin)
+        admin=$(ynh_app_setting_get --key=admin 2>/dev/null || true)
     fi
+
+    admin_email=${admin_email:-$(ynh_app_setting_get --key=admin_email 2>/dev/null || true)}
+    if [ -z "$admin_email" ] && [ -n "${admin:-}" ]; then
+        admin_email=$(ynh_user_get_info --username="$admin" --key=mail 2>/dev/null || ynh_user_get_info --username="$admin" --key=email 2>/dev/null || true)
+    fi
+    if [ -z "$admin_email" ]; then
+        admin_email="${admin:-admin}@${domain:-localhost}"
+    fi
+    ynh_app_setting_set --key=admin_email --value="$admin_email"
 
     cap_url=${cap_url:-$(ynh_app_setting_get --key=cap_url)}
     cap_site_key=${cap_site_key:-$(ynh_app_setting_get --key=cap_site_key)}
