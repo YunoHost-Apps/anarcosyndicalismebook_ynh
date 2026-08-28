@@ -13,9 +13,9 @@ maintainers = ["YunoHost Community"]
 
 [upstream]
 license = "MIT"
-website = "https://gitlab.com/anarchymedialibertaire-group/anarcosyndicalismebook"
-code = "https://gitlab.com/anarchymedialibertaire-group/anarcosyndicalismebook"
-admindoc = "https://gitlab.com/anarchymedialibertaire-group/anarcosyndicalismebook/-/blob/main/README.md"
+website = "https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook"
+code = "https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook"
+admindoc = "https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook/src/branch/main/README.md"
 
 [integration]
 yunohost = ">= 11.2.30"
@@ -99,10 +99,10 @@ ram.runtime = "128M"
 
 [resources]
     [resources.sources.main]
-    url = "https://gitlab.com/anarchymedialibertaire-group/anarcosyndicalismebook/-/archive/v1.3.0-beta.1/anarcosyndicalismebook-v1.3.0-beta.1.tar.gz"
-    sha256 = "2a7d023d1d9d6625fd5485cae4d4335cb47f982cdbcec8074bc9d3df09e03c38"
-    autoupdate.strategy = "latest_gitlab_tag"
-    autoupdate.upstream = "https://gitlab.com/anarchymedialibertaire-group/anarcosyndicalismebook"
+    url = "https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook/archive/v1.3.0-beta.1.tar.gz"
+    sha256 = "4704a781b6218b0e087defe8ffac9eb76ae4e705a99cc40eb0426bef9ae4c742"
+    autoupdate.strategy = "latest_gitea_tag"
+    autoupdate.upstream = "https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook"
 
     [resources.system_user]
 

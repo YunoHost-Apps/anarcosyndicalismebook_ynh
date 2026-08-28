@@ -4,7 +4,7 @@ It shall NOT be edited by hand.
 -->
 
 <h1 align="center">
-  <img src="https://gitlab.com/anarchymedialibertaire-group/anarcosyndicalismebook/-/raw/main/favicon.svg" alt="" width="80" height="80"><br>
+  <img src="https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook/raw/branch/main/favicon.svg" alt="" width="80" height="80"><br>
   AnarcosyndicalismeBOOK pour YunoHost
 </h1>
 
@@ -55,24 +55,24 @@ Conçu pour les collectifs, associations, syndicats souhaitant diffuser des text
 
 ## Documentations et ressources
 
-- Dépôt de code officiel de l'app : <https://gitlab.com/anarchymedialibertaire-group/anarcosyndicalismebook>
+- Dépôt de code officiel de l'app : <https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook>
 - YunoHost Store : <https://apps.yunohost.org/app/anarchosyndicalismebook>
-- Signaler un bug : <https://gitlab.com/anarchymedialibertaire-group/anarcosyndicalismebook_ynh/-/issues>
+- Signaler un bug : <https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook_ynh/issues>
 
 ## Informations pour les développeurs
 
-Merci de faire vos merge requests sur la [branche `testing`](https://gitlab.com/anarchymedialibertaire-group/anarcosyndicalismebook_ynh/-/tree/testing).
+Merci de faire vos merge requests sur la [branche `testing`](https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook_ynh/src/branch/testing).
 
 Pour essayer la branche `testing`, procédez comme suit :
 
 ```bash
-sudo yunohost app install https://gitlab.com/anarchymedialibertaire-group/anarcosyndicalismebook_ynh/-/archive/testing/anarcosyndicalismebook_ynh-testing.tar.gz --debug
+sudo yunohost app install https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook_ynh/archive/testing.tar.gz --debug
 ```
 
 ou
 
 ```bash
-sudo yunohost app upgrade anarchosyndicalismebook -u https://gitlab.com/anarchymedialibertaire-group/anarcosyndicalismebook_ynh/-/archive/testing/anarcosyndicalismebook_ynh-testing.tar.gz --debug
+sudo yunohost app upgrade anarchosyndicalismebook -u https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook_ynh/archive/testing.tar.gz --debug
 ```
 
 **Plus d'infos sur le packaging d'applications :** <https://yunohost.org/packaging_apps>

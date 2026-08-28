@@ -4,7 +4,7 @@ It shall NOT be edited by hand.
 -->
 
 <h1 align="center">
-  <img src="https://gitlab.com/anarchymedialibertaire-group/anarcosyndicalismebook/-/raw/main/favicon.svg" alt="" width="80" height="80"><br>
+  <img src="https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook/raw/branch/main/favicon.svg" alt="" width="80" height="80"><br>
   AnarcosyndicalismeBOOK for YunoHost
 </h1>
 
@@ -55,24 +55,24 @@ Designed for collectives, associations, unions wishing to share texts, alternati
 
 ## Documentation and resources
 
-- Upstream app code repository: <https://gitlab.com/anarchymedialibertaire-group/anarcosyndicalismebook>
+- Upstream app code repository: <https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook>
 - YunoHost Store: <https://apps.yunohost.org/app/anarchosyndicalismebook>
-- Report a bug: <https://gitlab.com/anarchymedialibertaire-group/anarcosyndicalismebook_ynh/-/issues>
+- Report a bug: <https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook_ynh/issues>
 
 ## Developer info
 
-Please send your merge request to the [testing branch](https://gitlab.com/anarchymedialibertaire-group/anarcosyndicalismebook_ynh/-/tree/testing).
+Please send your merge request to the [testing branch](https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook_ynh/src/branch/testing).
 
 To try the testing branch, please proceed like that:
 
 ```bash
-sudo yunohost app install https://gitlab.com/anarchymedialibertaire-group/anarcosyndicalismebook_ynh/-/archive/testing/anarcosyndicalismebook_ynh-testing.tar.gz --debug
+sudo yunohost app install https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook_ynh/archive/testing.tar.gz --debug
 ```
 
 or
 
 ```bash
-sudo yunohost app upgrade anarchosyndicalismebook -u https://gitlab.com/anarchymedialibertaire-group/anarcosyndicalismebook_ynh/-/archive/testing/anarcosyndicalismebook_ynh-testing.tar.gz --debug
+sudo yunohost app upgrade anarchosyndicalismebook -u https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook_ynh/archive/testing.tar.gz --debug
 ```
 
 **More info regarding app packaging:** <https://yunohost.org/packaging_apps>

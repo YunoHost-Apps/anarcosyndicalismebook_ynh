@@ -70,6 +70,6 @@ Cette version apporte des correctifs majeurs pour la stabilité, le déploiement
 ### 📦 Mise à jour
 Pour mettre à jour depuis une version précédente :
 ```bash
-sudo yunohost app upgrade anarchosyndicalismebook -u https://gitlab.com/anarchymedialibertaire-group/anarcosyndicalismebook_ynh
+sudo yunohost app upgrade anarchosyndicalismebook -u https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook_ynh
 ```
-*Note : Cette mise à jour migrera automatiquement votre installation d'une version "archive" vers une version "git" en préservant vos données et configurations.*
+*Note : Cette mise à jour préserve intégralement vos données, configurations et base de données.*
