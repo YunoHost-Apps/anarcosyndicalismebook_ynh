@@ -100,7 +100,7 @@ ram.runtime = "128M"
 [resources]
     [resources.sources.main]
     url = "https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook/archive/v1.3.0-beta.2.tar.gz"
-    sha256 = "ca36df173032c4ec535978665958cd39521e60eeb0f14fd5ab4e76210a913887"
+    sha256 = "26e5ece46c3b26a436c229fbc0db10953585a69b59ead5b7d9e73465fcf62da9"
     autoupdate.strategy = "latest_gitea_tag"
     autoupdate.upstream = "https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook"
 
