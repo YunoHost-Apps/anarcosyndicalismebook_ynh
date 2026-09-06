@@ -3,6 +3,10 @@
  * Configuration base de données - Généré par YunoHost
  */
 
+if (file_exists(__DIR__ . '/i18n.php')) {
+    require_once __DIR__ . '/i18n.php';
+}
+
 define('DB_HOST', 'localhost');
 define('DB_NAME', '__DB_NAME__');
 define('DB_USER', '__DB_USER__');
@@ -19,6 +23,13 @@ try {
             PDO::ATTR_EMULATE_PREPARES => false
         ]
     );
+
+    $autoMigrations = __DIR__ . '/auto_migrations.php';
+    if (is_readable($autoMigrations)) {
+        require_once $autoMigrations;
+        runAutomaticMigrations($pdo);
+    }
 } catch(PDOException $e) {
+    error_log("DB Connection Error: " . $e->getMessage());
     die("Erreur de connexion à la base de données");
 }
