@@ -7,7 +7,7 @@ name = "AnarcosyndicalismeBOOK"
 description.en = "Digital library CMS for sharing texts, PDFs and EPUBs"
 description.fr = "CMS de bibliothèque numérique pour partager textes, PDF et EPUB"
 
-version = "1.3.0~ynh1"
+version = "1.3.1~ynh1"
 
 maintainers = ["YunoHost Community"]
 
@@ -99,8 +99,8 @@ ram.runtime = "128M"
 
 [resources]
     [resources.sources.main]
-    url = "https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook/archive/v1.3.0.tar.gz"
-    sha256 = "c7424ced3888cde87b67e0e702f1f225e43377323e3fd961cb3a8b3c7d9c43d3"
+    url = "https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook/archive/v1.3.1.tar.gz"
+    sha256 = "c55d5fc0b65b2fcc4170a4f886b3773b2f84e5d0226276da522024990d9aef99"
     autoupdate.strategy = "latest_gitea_tag"
     autoupdate.upstream = "https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook"
 
