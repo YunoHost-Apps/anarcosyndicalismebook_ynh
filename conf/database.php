@@ -3,7 +3,7 @@
  * Configuration base de données - Généré par YunoHost
  */
 
-$includesDir = dirname(__FILE__);
+$includesDir = '__INSTALL_DIR__/includes';
 
 if (file_exists($includesDir . '/i18n.php')) {
     require_once $includesDir . '/i18n.php';

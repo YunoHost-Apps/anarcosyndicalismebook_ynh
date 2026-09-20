@@ -134,6 +134,7 @@ render_app_config() {
     CAP_URL=$(php_escape "$cap_url")
     CAP_SITE_KEY=$(php_escape "$cap_site_key")
     CAP_SECRET_KEY=$(php_escape "$cap_secret_key")
+    INSTALL_DIR=$(php_escape "$install_dir")
 
     mkdir -p "$install_dir/includes"
 
