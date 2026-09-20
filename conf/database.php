@@ -3,11 +3,13 @@
  * Configuration base de données - Généré par YunoHost
  */
 
-if (file_exists(__DIR__ . '/i18n.php')) {
-    require_once __DIR__ . '/i18n.php';
+$includesDir = dirname(__FILE__);
+
+if (file_exists($includesDir . '/i18n.php')) {
+    require_once $includesDir . '/i18n.php';
 }
-if (file_exists(__DIR__ . '/url.php')) {
-    require_once __DIR__ . '/url.php';
+if (file_exists($includesDir . '/url.php')) {
+    require_once $includesDir . '/url.php';
 }
 
 define('DB_HOST', 'localhost');
@@ -27,7 +29,7 @@ try {
         ]
     );
 
-    $autoMigrations = __DIR__ . '/auto_migrations.php';
+    $autoMigrations = $includesDir . '/auto_migrations.php';
     if (is_readable($autoMigrations)) {
         require_once $autoMigrations;
         runAutomaticMigrations($pdo);
