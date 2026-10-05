@@ -32,4 +32,4 @@ Backups are managed by YunoHost's native system. Data (uploads, database backups
 
 The application now features an internal logging system for debugging and migrations:
 - **App Logs**: `/home/yunohost.app/anarchosyndicalismebook/logs/error.log`
-- **System Logs (FPM)**: `/var/log/php8.2-fpm-anarchosyndicalismebook.log`
+- **System Logs (FPM)**: `/var/log/php<VERSION>-fpm-anarchosyndicalismebook.log` (replace `<VERSION>` with the PHP version used by the application).

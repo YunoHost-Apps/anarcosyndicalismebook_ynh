@@ -11,20 +11,21 @@ composer_version="2.8.3"
 # CUSTOM HELPERS
 #=================================================
 
-# Detect the active PHP major.minor version used by the system/app
+# Detect the newest available PHP major.minor version used by the system/app.
+# YunoHost can keep several PHP branches installed at the same time. Do not
+# permanently pin the app to an older branch saved in its settings: after a
+# YunoHost upgrade, select the newest installed branch automatically.
 detect_php_version() {
-    if [ -n "$php_version" ]; then
-        return 0
+    if [ -z "$php_version" ] && [ -d /etc/php ]; then
+        while IFS= read -r candidate; do
+            if command -v "php$candidate" >/dev/null 2>&1 && [ -f "/etc/php/$candidate/fpm/php-fpm.conf" ]; then
+                php_version="$candidate"
+            fi
+        done < <(find /etc/php -mindepth 1 -maxdepth 1 -type d -printf '%f\n' | sort -V)
     fi
-
-    php_version=$(ynh_app_setting_get --key=php_version 2>/dev/null || true)
 
     if [ -z "$php_version" ] && command -v php >/dev/null 2>&1; then
         php_version=$(php -r 'echo PHP_MAJOR_VERSION . "." . PHP_MINOR_VERSION;' 2>/dev/null || true)
-    fi
-
-    if [ -z "$php_version" ] && [ -d /etc/php ]; then
-        php_version=$(find /etc/php -mindepth 1 -maxdepth 1 -type d -printf '%f\n' | sort -V | tail -n 1)
     fi
 
     [ -n "$php_version" ]
