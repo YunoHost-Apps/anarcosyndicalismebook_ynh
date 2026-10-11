@@ -45,7 +45,7 @@ Designed for collectives, associations, unions wishing to share texts, alternati
 - **Social & Sharing**: Social sharing (Mastodon, Bluesky, Telegram, etc.) and integrated Newsletter.
 - **Security**: 2FA protection, Passkeys (WebAuthn), and CAP autonomous anti-bot protection.
 
-**Shipped version:** 1.3.1~ynh1 (AnarcosyndicalismeBOOK v1.3.1)
+**Shipped version:** 1.3.1~ynh2 (AnarcosyndicalismeBOOK main, commit c94ac69)
 
 **License:** MIT
 

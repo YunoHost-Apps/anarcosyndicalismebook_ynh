@@ -45,7 +45,7 @@ Conçu pour les collectifs, associations, syndicats souhaitant diffuser des text
 - **Partage & Social** : Partage social (Mastodon, Bluesky, Telegram, etc.) et Newsletter intégrée.
 - **Sécurité** : Protection 2FA, Passkeys (WebAuthn) et protection anti-robot autonome CAP.
 
-**Version incluse :** 1.3.1~ynh1 (AnarcosyndicalismeBOOK v1.3.1)
+**Version incluse :** 1.3.1~ynh2 (AnarcosyndicalismeBOOK main, commit c94ac69)
 
 **Licence :** MIT
 
