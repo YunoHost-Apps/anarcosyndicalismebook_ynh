@@ -117,9 +117,42 @@ ynh_script_progression "Checking for database updates..."
 # Check if there are any database migration scripts to run
 if [[ -f "$install_dir/sql/migrations.sql" ]]; then
     ynh_print_info "Running database migrations..."
-    # S'assurer que la colonne 'actif' existe sur les anciennes installations YunoHost
-    ynh_mysql_db_shell <<EOF || true
-ALTER TABLE \`menu\` ADD COLUMN IF NOT EXISTS \`actif\` tinyint(1) NOT NULL DEFAULT 1;
+    # Harmoniser l'ancien schéma menu avant d'ajouter les nouvelles colonnes.
+    # Les données sont conservées : seules les anciennes colonnes sont renommées.
+    ynh_mysql_db_shell <<'EOF' || ynh_die "Unable to normalize the menu table schema"
+SET @has_nomenu = (
+    SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'menu' AND COLUMN_NAME = 'nomenu'
+);
+SET @has_id = (
+    SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'menu' AND COLUMN_NAME = 'id'
+);
+SET @rename_id = IF(
+    @has_nomenu = 1 AND @has_id = 0,
+    'ALTER TABLE `menu` CHANGE COLUMN `nomenu` `id` INT(11) NOT NULL AUTO_INCREMENT',
+    'SELECT 1'
+);
+PREPARE stmt_id FROM @rename_id;
+EXECUTE stmt_id;
+DEALLOCATE PREPARE stmt_id;
+
+SET @has_actif = (
+    SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'menu' AND COLUMN_NAME = 'actif'
+);
+SET @has_visible = (
+    SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'menu' AND COLUMN_NAME = 'visible'
+);
+SET @rename_visible = IF(
+    @has_actif = 1 AND @has_visible = 0,
+    'ALTER TABLE `menu` CHANGE COLUMN `actif` `visible` TINYINT(1) NOT NULL DEFAULT 1',
+    'SELECT 1'
+);
+PREPARE stmt_visible FROM @rename_visible;
+EXECUTE stmt_visible;
+DEALLOCATE PREPARE stmt_visible;
 EOF
     ynh_mysql_db_shell < "$install_dir/sql/migrations.sql"
 fi

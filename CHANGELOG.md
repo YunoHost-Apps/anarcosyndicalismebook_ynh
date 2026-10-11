@@ -1,9 +1,10 @@
 # Changelog
 
-## [1.3.1~ynh2] - 2026-10-11
+## [1.3.1~ynh3] - 2026-10-11
 - Alignement de la source sur `main` après la promotion de la bêta 4.
 - Intégration du menu actualisé, des migrations et des correctifs d’importation.
 - Vérification du checksum de l’archive source figée sur le commit publié.
+- Normalisation automatique des anciennes colonnes `menu.nomenu`/`menu.actif` pendant l’upgrade YunoHost.
 
 ## [1.3.0~ynh1] - 2026-08-27
 - **Mise à jour majeure du cœur** : Passage à AnarcosyndicalismeBOOK `v1.3.0-beta.1`.
