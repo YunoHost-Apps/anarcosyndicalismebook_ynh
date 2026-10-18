@@ -12,3 +12,4 @@ define('SITE_URL', '__SITE_URL__');
 define('CAP_URL', '__CAP_URL__');
 define('CAP_SITE_KEY', '__CAP_SITE_KEY__');
 define('CAP_SECRET_KEY', '__CAP_SECRET_KEY__');
+define('BACKUP_DIR', '__DATA_DIR__/backups');
