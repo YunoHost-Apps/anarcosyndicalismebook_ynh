@@ -22,11 +22,17 @@ Le compte administrateur est créé automatiquement lors de l'installation. Util
 - **Auto-publication** — Configuration de la publication automatique vers Mastodon, Bluesky, Facebook, etc.
 - **Paramètres** — Personnalisation du site (Titre, SEO, Couleurs, Logos).
 - **Diagnostics** — Vérification de l'état de la base de données et des fichiers système.
-- **Mises à jour** — Vérification et installation des nouvelles versions depuis GitLab.
+- **Mises à jour** — Vérification et installation des nouvelles versions depuis Codeberg.
 
 ### Sauvegardes
 
-Les sauvegardes sont gérées par le système natif de YunoHost. Les données (uploads, backups BDD, fichiers PHP) sont stockées de manière persistante.
+Les sauvegardes sont gérées par le système natif de YunoHost. Les données
+persistantes se trouvent dans le répertoire de données YunoHost (généralement
+`/home/yunohost.app/anarchosyndicalismebook`) : `uploads`, `backups`, `logs` et
+`releases`. L'installation et les mises à niveau créent automatiquement ces
+répertoires et les relient à l'application. Le chemin de volume Docker
+`/var/lib/anarcosyndicalismebook/backups` ne doit pas être utilisé dans le
+paquet YunoHost.
 
 ### Logs (Journaux d'erreurs)
 

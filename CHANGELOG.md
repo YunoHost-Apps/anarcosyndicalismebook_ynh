@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.3.1~ynh4] - 2026-10-19
+- Alignement de la source sur la branche LTS publiée de l'application.
+- Création initiale du compte administrateur avec mot de passe obligatoire d'au moins 12 caractères.
+- Échappement des valeurs avant leur insertion SQL lors de l'installation.
+- Documentation des répertoires persistants YunoHost et distinction avec le montage Docker.
+
 ## [1.3.1~ynh3] - 2026-10-11
 - Alignement de la source sur `main` après la promotion de la bêta 4.
 - Intégration du menu actualisé, des migrations et des correctifs d’importation.

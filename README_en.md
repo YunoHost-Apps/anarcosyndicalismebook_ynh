@@ -45,7 +45,7 @@ Designed for collectives, associations, unions wishing to share texts, alternati
 - **Social & Sharing**: Social sharing (Mastodon, Bluesky, Telegram, etc.) and integrated Newsletter.
 - **Security**: 2FA protection, Passkeys (WebAuthn), and CAP autonomous anti-bot protection.
 
-**Shipped version:** 1.3.1~ynh3 (AnarcosyndicalismeBOOK main, commit c94ac69)
+**Shipped version:** 1.3.1~ynh4 (AnarcosyndicalismeBOOK LTS, commit 51b52a7)
 
 **License:** MIT
 
@@ -58,6 +58,14 @@ Designed for collectives, associations, unions wishing to share texts, alternati
 - Upstream app code repository: <https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook>
 - YunoHost Store: <https://apps.yunohost.org/app/anarchosyndicalismebook>
 - Report a bug: <https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook_ynh/issues>
+
+## Persistent data
+
+YunoHost stores application data in its data directory (usually
+`/home/yunohost.app/anarchosyndicalismebook`). The application's `uploads`,
+`backups`, `logs`, and `releases` directories are linked there during
+installation and upgrades. Do not add a Docker volume or change these paths
+when running the YunoHost package.
 
 ## Developer info
 

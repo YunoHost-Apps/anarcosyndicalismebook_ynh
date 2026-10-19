@@ -128,17 +128,25 @@ fi
 #=================================================
 ynh_script_progression "Creating admin user..."
 
+if [[ -z "${admin_password:-}" || ${#admin_password} -lt 12 ]]; then
+    ynh_die "The administrator password must be defined and contain at least 12 characters."
+fi
+
 if [ -z "${admin_email:-}" ]; then
     admin_email=$(ynh_user_get_info --username="$admin" --key=mail 2>/dev/null || ynh_user_get_info --username="$admin" --key=email 2>/dev/null || true)
     admin_email="${admin_email:-${admin}@${domain}}"
 fi
 
 hashed_password=$(php"$php_version" -r 'echo password_hash($argv[1], PASSWORD_DEFAULT);' "$admin_password")
+admin_sql=$(php_escape "$admin")
+admin_email_sql=$(php_escape "$admin_email")
+hashed_password_sql=$(php_escape "$hashed_password")
 
-# Use prepared statement for security
+# Escape all values before passing them to the SQL client. The password itself
+# is never written to the logs or inserted in clear text.
 ynh_mysql_db_shell <<EOF
-INSERT INTO utilisateur (nom, prenom, mel, motpasse, role, dateinscription) 
-VALUES ('${admin}', 'Admin', '${admin_email}', '${hashed_password}', 'admin', NOW());
+INSERT INTO utilisateur (nom, prenom, mel, motpasse, role, dateinscription)
+VALUES ('${admin_sql}', 'Admin', '${admin_email_sql}', '${hashed_password_sql}', 'admin', NOW());
 EOF
 
 #=================================================

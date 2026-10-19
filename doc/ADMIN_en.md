@@ -22,11 +22,17 @@ The administrator account is created automatically during installation. Use the 
 - **Auto-posting** — Setup for automatic publishing to Mastodon, Bluesky, Facebook, etc.
 - **Settings** — Site customization (Title, SEO, Colors, Logos).
 - **Diagnostics** — Verification of database integrity and system files.
-- **Updates** — Checking and installing new versions from GitLab.
+- **Updates** — Checking and installing new versions from Codeberg.
 
 ### Backups
 
-Backups are managed by YunoHost's native system. Data (uploads, database backups, PHP files) are stored persistently.
+Backups are managed by YunoHost's native system. Persistent data is stored in
+the YunoHost data directory (usually
+`/home/yunohost.app/anarchosyndicalismebook`): `uploads`, `backups`, `logs`,
+and `releases`. Installation and upgrades create these directories and link
+them to the application automatically. The Docker volume path
+`/var/lib/anarcosyndicalismebook/backups` must not be used for the YunoHost
+package.
 
 ### Logs (Error Reporting)
 
