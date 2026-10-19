@@ -161,7 +161,7 @@ SET @has_menu = (
 );
 SET @normalize_icons = IF(
     @has_menu = 1,
-    'UPDATE `menu` SET `icone` = CONCAT(''fas '', TRIM(`icone`)) WHERE `icone` IS NOT NULL AND TRIM(`icone`) REGEXP ''^fa-[[:alnum:]-]+$''',
+    'UPDATE `menu` SET `icone` = CONCAT(''fas '', TRIM(`icone`)) WHERE `icone` IS NOT NULL AND TRIM(`icone`) REGEXP ''(^|[[:space:]])fa-[[:alnum:]-]+'' AND TRIM(`icone`) NOT REGEXP ''(^|[[:space:]])(fas|far|fab|fad|fal|fat|fa-solid|fa-regular|fa-brands)([[:space:]]|$)''',
     'SELECT 1'
 );
 PREPARE stmt_menu_icons FROM @normalize_icons;
