@@ -123,6 +123,10 @@ else
     ynh_die "Database schema file not found: $install_dir/sql/database_numerique.sql"
 fi
 
+# The upstream SQL uses legacy Font Awesome class names such as fa-home.
+# Normalize them for the locally bundled Font Awesome stylesheet.
+normalize_menu_icons
+
 #=================================================
 # CREATE ADMIN USER
 #=================================================

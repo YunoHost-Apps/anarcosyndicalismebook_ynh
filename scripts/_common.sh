@@ -151,3 +151,21 @@ render_app_config() {
     chmod 400 "$install_dir/includes/database.php" "$install_dir/includes/config.php"
     chown "$app:$app" "$install_dir/includes/database.php" "$install_dir/includes/config.php"
 }
+
+normalize_menu_icons() {
+    ynh_mysql_db_shell <<'EOF' || ynh_die "Unable to normalize navigation menu icons"
+SET @has_menu = (
+    SELECT COUNT(*)
+    FROM INFORMATION_SCHEMA.TABLES
+    WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'menu'
+);
+SET @normalize_icons = IF(
+    @has_menu = 1,
+    'UPDATE `menu` SET `icone` = CONCAT(''fas '', TRIM(`icone`)) WHERE `icone` IS NOT NULL AND TRIM(`icone`) REGEXP ''^fa-[[:alnum:]-]+$''',
+    'SELECT 1'
+);
+PREPARE stmt_menu_icons FROM @normalize_icons;
+EXECUTE stmt_menu_icons;
+DEALLOCATE PREPARE stmt_menu_icons;
+EOF
+}

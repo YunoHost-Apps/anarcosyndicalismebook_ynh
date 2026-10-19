@@ -157,6 +157,10 @@ EOF
     ynh_mysql_db_shell < "$install_dir/sql/migrations.sql"
 fi
 
+# Repair legacy menu icon values on existing installations without changing
+# user-created menus that already contain a complete Font Awesome prefix.
+normalize_menu_icons
+
 #=================================================
 # UPDATE CONFIGURATION FILES
 #=================================================
