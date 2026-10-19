@@ -3,6 +3,14 @@
 source _common.sh
 source /usr/share/yunohost/helpers
 
+# Retrieve the PHP-FPM version before removing the app settings.  The generic
+# helper may otherwise build /etc/php//fpm/... and try to reload the
+# non-existent php-fpm.service on systems using versioned PHP services.
+php_version=$(ynh_app_setting_get --key=php_version 2>/dev/null || true)
+if [ -z "$php_version" ]; then
+    detect_php_version || true
+fi
+
 #=================================================
 # REMOVE SYSTEM CONFIGURATIONS
 #=================================================
@@ -10,7 +18,19 @@ ynh_script_progression "Removing system configurations..."
 
 ynh_config_remove_nginx
 
-ynh_config_remove_phpfpm
+if [ -n "$php_version" ]; then
+    php_fpm_pool="/etc/php/$php_version/fpm/pool.d/$app.conf"
+    if [ -e "$php_fpm_pool" ]; then
+        rm -f -- "$php_fpm_pool"
+    fi
+
+    php_fpm_service="php${php_version}-fpm"
+    if systemctl list-unit-files --type=service "$php_fpm_service.service" 2>/dev/null | grep -q "$php_fpm_service.service"; then
+        ynh_systemctl --service="$php_fpm_service" --action=reload
+    fi
+else
+    ynh_print_warn "Unable to detect PHP-FPM version; PHP-FPM pool cleanup was skipped."
+fi
 
 #=================================================
 # END OF SCRIPT
