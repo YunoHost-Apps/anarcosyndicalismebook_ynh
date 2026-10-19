@@ -95,6 +95,11 @@ load_app_settings() {
     cap_url=${cap_url:-$(ynh_app_setting_get --key=cap_url)}
     cap_site_key=${cap_site_key:-$(ynh_app_setting_get --key=cap_site_key)}
     cap_secret_key=${cap_secret_key:-$(ynh_app_setting_get --key=cap_secret_key)}
+    calibre_encryption_key=${calibre_encryption_key:-$(ynh_app_setting_get --key=calibre_encryption_key 2>/dev/null || true)}
+    if [ -z "$calibre_encryption_key" ]; then
+        calibre_encryption_key=$(openssl rand -hex 32)
+        ynh_app_setting_set --key=calibre_encryption_key --value="$calibre_encryption_key"
+    fi
     cap_url=${cap_url:-"http://127.0.0.1:3000"}
     smtp_host=${smtp_host:-$(ynh_app_setting_get --key=smtp_host)}
     smtp_port=${smtp_port:-$(ynh_app_setting_get --key=smtp_port)}
@@ -135,6 +140,7 @@ render_app_config() {
     CAP_URL=$(php_escape "$cap_url")
     CAP_SITE_KEY=$(php_escape "$cap_site_key")
     CAP_SECRET_KEY=$(php_escape "$cap_secret_key")
+    CALIBRE_ENCRYPTION_KEY=$(php_escape "$calibre_encryption_key")
     INSTALL_DIR=$(php_escape "$install_dir")
 
     mkdir -p "$install_dir/includes"

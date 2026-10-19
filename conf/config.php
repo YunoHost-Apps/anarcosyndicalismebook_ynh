@@ -12,4 +12,8 @@ define('SITE_URL', '__SITE_URL__');
 define('CAP_URL', '__CAP_URL__');
 define('CAP_SITE_KEY', '__CAP_SITE_KEY__');
 define('CAP_SECRET_KEY', '__CAP_SECRET_KEY__');
+define('CALIBRE_ENCRYPTION_KEY', '__CALIBRE_ENCRYPTION_KEY__');
+define('CAPTCHA_DISABLED', false);
+define('API_CORS_ORIGINS', '');
+define('TRUSTED_PROXY_IPS', '127.0.0.1,::1');
 define('BACKUP_DIR', '__DATA_DIR__/backups');
