@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.3.1~ynh14] - 2026-10-22
+- Alignement de la source YunoHost sur la branche LTS courante (`release/v1.3.1-lts`).
+- Intégration des derniers correctifs de sécurité et de compatibilité publiés dans l’application.
+- Le paquet YunoHost reste natif : il ne dépend pas d’une image Docker CAP.
+
 ## [1.3.1~ynh13] - 2026-10-21
 - **Correctif de sécurité critique (PHP 8.4.27)** : Mise à jour de la source vers le commit de sécurité `release/v1.3.1-lts` intégrant le correctif PHP 8.4.27.
 - Élimination des vulnérabilités RCE non authentifiées CVE-2026-109618 et CVE-2026-109619.
