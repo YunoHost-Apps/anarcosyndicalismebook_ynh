@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.3.1~ynh13] - 2026-10-21
+- **Correctif de sécurité critique (PHP 8.4.27)** : Mise à jour de la source vers le commit de sécurité `release/v1.3.1-lts` intégrant le correctif PHP 8.4.27.
+- Élimination des vulnérabilités RCE non authentifiées CVE-2026-109618 et CVE-2026-109619.
+- Les instances YunoHost utilisant PHP 8.4 sont automatiquement protégées lors de la prochaine mise à jour des paquets système (`apt upgrade`). La mise à jour du paquet YunoHost aligne la source de l'application sur la version sécurisée.
+
 ## [1.3.1~ynh4] - 2026-10-19
 - Alignement de la source sur la branche LTS publiée de l'application.
 - Création initiale du compte administrateur avec mot de passe obligatoire d'au moins 12 caractères.
