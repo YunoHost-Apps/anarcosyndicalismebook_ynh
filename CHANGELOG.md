@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.3.1~ynh15] - 2026-10-25
+- Mise à jour de la source YunoHost vers la dernière branche LTS (`release/v1.3.1-lts`).
+- Intégration du correctif de détection des mises à jour signées de même version.
+- Checksum de l’archive source recalculé et vérifié.
+
 ## [1.3.1~ynh14] - 2026-10-22
 - Alignement de la source YunoHost sur la branche LTS courante (`release/v1.3.1-lts`).
 - Intégration des derniers correctifs de sécurité et de compatibilité publiés dans l’application.
