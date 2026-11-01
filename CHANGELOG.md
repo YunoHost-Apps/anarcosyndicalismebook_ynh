@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.3.1~ynh16] - 2026-11-01
+- Mise à jour de la source YunoHost vers la dernière révision de la branche LTS (`release/v1.3.1-lts`).
+- Intégration du support étendu des libellés de langue française pour l'export OAI-PMH (PR #32).
+- Normalisation du tag de version pour la vérification et signature des mises à jour.
+- Checksum de l’archive source recalculé et vérifié.
+
 ## [1.3.1~ynh15] - 2026-10-25
 - Mise à jour de la source YunoHost vers la dernière branche LTS (`release/v1.3.1-lts`).
 - Intégration du correctif de détection des mises à jour signées de même version.
