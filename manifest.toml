@@ -103,8 +103,8 @@ ram.runtime = "128M"
 
 [resources]
     [resources.sources.main]
-    url = "https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook/archive/92143e4191cd1525f3959b56d905aea5981fecaa.tar.gz"
-    sha256 = "8673c72f6b0121fac89f506c42106fc8201ea44acf3baf2ae690c62db5999dfe"
+    url = "https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook/archive/c8690996cd051bc847267038df6017d89fcab3c0.tar.gz"
+    sha256 = "9d2837a3cc5895c8549fde29cd46a5aa62c1d83294d9a7a3e7cdca8c870bbb68"
 
     [resources.system_user]
 
