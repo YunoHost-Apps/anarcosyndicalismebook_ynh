@@ -118,7 +118,7 @@ ram.runtime = "128M"
     admin.allowed = "admins"
 
     [resources.apt]
-    packages = "git, mariadb-server, php-cli, php-fpm, php-mysql, php-curl, php-mbstring, php-sqlite3, php-xml, php-gd, php-zip"
+    packages = "git, mariadb-server, php8.4-cli, php8.4-fpm, php8.4-mysql, php8.4-curl, php8.4-mbstring, php8.4-sqlite3, php8.4-xml, php8.4-gd, php8.4-zip, php8.4-intl, php8.4-opcache"
 
     [resources.database]
     type = "mysql"

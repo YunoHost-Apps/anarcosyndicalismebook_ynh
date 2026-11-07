@@ -12,7 +12,7 @@ check_php_version
 ynh_script_progression "Installing PHP $php_version extensions..."
 
 # Install versioned PHP extensions to ensure they match the active PHP-FPM version.
-for ext in zip gd sqlite3 curl mbstring xml; do
+for ext in zip gd sqlite3 curl mbstring xml intl opcache; do
     pkg="php${php_version}-${ext}"
     if ! dpkg -l "$pkg" 2>/dev/null | grep -q '^ii'; then
         apt-get install -y --no-install-recommends "$pkg" || ynh_print_info "Could not install $pkg (may already be installed under another name)"
@@ -20,7 +20,7 @@ for ext in zip gd sqlite3 curl mbstring xml; do
 done
 
 # Enable extensions in PHP-FPM and CLI
-for ext in zip gd sqlite3 curl mbstring xml; do
+for ext in zip gd sqlite3 curl mbstring xml intl opcache; do
     phpenmod -v "$php_version" "$ext" 2>/dev/null || true
 done
 

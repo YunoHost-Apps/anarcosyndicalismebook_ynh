@@ -3,6 +3,7 @@
 ## [1.3.1~ynh19] - 2026-11-07
 - Alignement de l'ID du paquet sur `anarcosyndicalismebook` en conformité avec le nom du dépôt Codeberg `anarcosyndicalismebook_ynh`.
 - Actualisation du mainteneur du paquet (`maintainers = ["AnARCHIS12"]`).
+- Montée de version de la pile PHP vers PHP 8.4 contemporain stable (paquets `php8.4-*` déclarés explicitement dans `manifest.toml` avec support `intl` et `opcache`).
 - Ajustement de la politique de mot de passe administrateur (minimum 8 caractères, support `ynh_in_ci_tests` pour les tests automatisés du catalogue YunoHost).
 - Ajout des logos officiels du CMS au format PNG (512x512) et SVG dans le dossier `doc/`.
 
