@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.3.1~ynh18] - 2026-11-07
+- Mise à jour de la source YunoHost vers la dernière révision de la branche LTS (`release/v1.3.1-lts`, commit `966cee12`).
+- Intégration du durcissement de sécurité de l'attribut `data-call` (liste blanche stricte des 40 fonctions autorisées, éliminant les risques de contournement CSP sur les pages CAPTCHA, PR #34).
+- Mise à jour du cache Service Worker (`sw.js`).
+- Alignement du workflow et des permissions de synchronisation des traductions.
+- Checksum de l’archive source recalculé et vérifié.
+
+## [1.3.1~ynh17] - 2026-11-01
+- Mise à jour de la source YunoHost vers la branche LTS (`release/v1.3.1-lts`, commit `4c154354`).
+- Amélioration du découpage auteur/titre et des métadonnées RSS/OAI-PMH.
+- Checksum de l’archive source recalculé et vérifié.
+
 ## [1.3.1~ynh16] - 2026-11-01
 - Mise à jour de la source YunoHost vers la dernière révision de la branche LTS (`release/v1.3.1-lts`).
 - Intégration du support étendu des libellés de langue française pour l'export OAI-PMH (PR #32).
