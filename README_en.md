@@ -16,7 +16,7 @@ It shall NOT be edited by hand.
 </p>
 
 <p align="center">
-  <a href="https://install-app.yunohost.org/?app=anarchosyndicalismebook"><img src="https://install-app.yunohost.org/install-with-yunohost.svg" alt="Install with YunoHost"></a>
+  <a href="https://install-app.yunohost.org/?app=anarcosyndicalismebook"><img src="https://install-app.yunohost.org/install-with-yunohost.svg" alt="Install with YunoHost"></a>
 </p>
 
 *[Lire ce README en français.](./README.md)*
@@ -56,13 +56,13 @@ Designed for collectives, associations, unions wishing to share texts, alternati
 ## Documentation and resources
 
 - Upstream app code repository: <https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook>
-- YunoHost Store: <https://apps.yunohost.org/app/anarchosyndicalismebook>
+- YunoHost Store: <https://apps.yunohost.org/app/anarcosyndicalismebook>
 - Report a bug: <https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook_ynh/issues>
 
 ## Persistent data
 
 YunoHost stores application data in its data directory (usually
-`/home/yunohost.app/anarchosyndicalismebook`). The application's `uploads`,
+`/home/yunohost.app/anarcosyndicalismebook`). The application's `uploads`,
 `backups`, `logs`, and `releases` directories are linked there during
 installation and upgrades. Do not add a Docker volume or change these paths
 when running the YunoHost package.
@@ -80,7 +80,7 @@ sudo yunohost app install https://codeberg.org/Anarcosyndicalismebook/anarcosynd
 or
 
 ```bash
-sudo yunohost app upgrade anarchosyndicalismebook -u https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook_ynh/archive/testing.tar.gz --debug
+sudo yunohost app upgrade anarcosyndicalismebook -u https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook_ynh/archive/testing.tar.gz --debug
 ```
 
 **More info regarding app packaging:** <https://yunohost.org/packaging_apps>

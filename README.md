@@ -16,7 +16,7 @@ It shall NOT be edited by hand.
 </p>
 
 <p align="center">
-  <a href="https://install-app.yunohost.org/?app=anarchosyndicalismebook"><img src="https://install-app.yunohost.org/install-with-yunohost.svg" alt="Installer avec YunoHost"></a>
+  <a href="https://install-app.yunohost.org/?app=anarcosyndicalismebook"><img src="https://install-app.yunohost.org/install-with-yunohost.svg" alt="Installer avec YunoHost"></a>
 </p>
 
 *[Read this README in English.](./README_en.md)*
@@ -56,13 +56,13 @@ Conçu pour les collectifs, associations, syndicats souhaitant diffuser des text
 ## Documentations et ressources
 
 - Dépôt de code officiel de l'app : <https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook>
-- YunoHost Store : <https://apps.yunohost.org/app/anarchosyndicalismebook>
+- YunoHost Store : <https://apps.yunohost.org/app/anarcosyndicalismebook>
 - Signaler un bug : <https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook_ynh/issues>
 
 ## Données persistantes
 
 YunoHost conserve les données de l'application dans son répertoire de données
-(généralement `/home/yunohost.app/anarchosyndicalismebook`). Les dossiers
+(généralement `/home/yunohost.app/anarcosyndicalismebook`). Les dossiers
 `uploads`, `backups`, `logs` et `releases` de l'application sont reliés à cet
 emplacement pendant l'installation et les mises à niveau. Il ne faut pas
 ajouter un montage Docker ni modifier ces chemins dans une installation
@@ -81,7 +81,7 @@ sudo yunohost app install https://codeberg.org/Anarcosyndicalismebook/anarcosynd
 ou
 
 ```bash
-sudo yunohost app upgrade anarchosyndicalismebook -u https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook_ynh/archive/testing.tar.gz --debug
+sudo yunohost app upgrade anarcosyndicalismebook -u https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook_ynh/archive/testing.tar.gz --debug
 ```
 
 **Plus d'infos sur le packaging d'applications :** <https://yunohost.org/packaging_apps>

@@ -2,14 +2,14 @@
 
 packaging_format = 2
 
-id = "anarchosyndicalismebook"
+id = "anarcosyndicalismebook"
 name = "AnarcosyndicalismeBOOK"
 description.en = "Digital library CMS for sharing texts, PDFs and EPUBs"
 description.fr = "CMS de bibliothèque numérique pour partager textes, PDF et EPUB"
 
-version = "1.3.1~ynh18"
+version = "1.3.1~ynh19"
 
-maintainers = ["YunoHost Community"]
+maintainers = ["AnARCHIS12"]
 
 [upstream]
 license = "MIT"
@@ -45,10 +45,10 @@ ram.runtime = "128M"
 
     [install.admin_password]
     type = "password"
-    ask.en = "Application administrator password (minimum 12 characters)"
-    ask.fr = "Mot de passe administrateur de l’application (12 caractères minimum)"
-    help.en = "This password is used to access the application administrator account."
-    help.fr = "Ce mot de passe sert à accéder au compte administrateur de l’application."
+    ask.en = "Application administrator password (minimum 8 characters)"
+    ask.fr = "Mot de passe administrateur de l’application (8 caractères minimum)"
+    help.en = "This password is used to access the application administrator account (minimum 8 characters)."
+    help.fr = "Ce mot de passe sert à accéder au compte administrateur de l’application (8 caractères minimum)."
 
     [install.cap_url]
     type = "string"

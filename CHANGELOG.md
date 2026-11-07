@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.3.1~ynh19] - 2026-11-07
+- Alignement de l'ID du paquet sur `anarcosyndicalismebook` en conformité avec le nom du dépôt Codeberg `anarcosyndicalismebook_ynh`.
+- Actualisation du mainteneur du paquet (`maintainers = ["AnARCHIS12"]`).
+- Ajustement de la politique de mot de passe administrateur (minimum 8 caractères, support `ynh_in_ci_tests` pour les tests automatisés du catalogue YunoHost).
+- Ajout des logos officiels du CMS au format PNG (512x512) et SVG dans le dossier `doc/`.
+
 ## [1.3.1~ynh18] - 2026-11-07
 - Mise à jour de la source YunoHost vers la dernière révision de la branche LTS (`release/v1.3.1-lts`, commit `966cee12`).
 - Intégration du durcissement de sécurité de l'attribut `data-call` (liste blanche stricte des 40 fonctions autorisées, éliminant les risques de contournement CSP sur les pages CAPTCHA, PR #34).
@@ -112,9 +118,9 @@ Cette version apporte des correctifs majeurs pour la stabilité, le déploiement
     *   Mise à jour immédiate des variables de session (Prénom/Nom) après modification du profil.
     *   Installation correcte des dépendances Composer (PHPMailer) lors de l'installation et de la mise à jour.
 
-### 📦 Mise à jour
+### Mise à jour
 Pour mettre à jour depuis une version précédente :
 ```bash
-sudo yunohost app upgrade anarchosyndicalismebook -u https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook_ynh
+sudo yunohost app upgrade anarcosyndicalismebook -u https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook_ynh
 ```
 *Note : Cette mise à jour préserve intégralement vos données, configurations et base de données.*

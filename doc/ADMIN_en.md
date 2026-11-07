@@ -28,7 +28,7 @@ The administrator account is created automatically during installation. Use the 
 
 Backups are managed by YunoHost's native system. Persistent data is stored in
 the YunoHost data directory (usually
-`/home/yunohost.app/anarchosyndicalismebook`): `uploads`, `backups`, `logs`,
+`/home/yunohost.app/anarcosyndicalismebook`): `uploads`, `backups`, `logs`,
 and `releases`. Installation and upgrades create these directories and link
 them to the application automatically. The Docker volume path
 `/var/lib/anarcosyndicalismebook/backups` must not be used for the YunoHost
@@ -37,5 +37,5 @@ package.
 ### Logs (Error Reporting)
 
 The application now features an internal logging system for debugging and migrations:
-- **App Logs**: `/home/yunohost.app/anarchosyndicalismebook/logs/error.log`
-- **System Logs (FPM)**: `/var/log/php<VERSION>-fpm-anarchosyndicalismebook.log` (replace `<VERSION>` with the PHP version used by the application).
+- **App Logs**: `/home/yunohost.app/anarcosyndicalismebook/logs/error.log`
+- **System Logs (FPM)**: `/var/log/php<VERSION>-fpm-anarcosyndicalismebook.log` (replace `<VERSION>` with the PHP version used by the application).
