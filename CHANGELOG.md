@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.3.1~ynh20] - 2026-11-09
+- Mise à jour de la source vers la dernière révision LTS stabilisée (`release/v1.3.1-lts`, commit `d5a2bbdd`).
+- Intégration de la détection fine des canaux de mise à jour (LTS et Bêta) avec gestion et purge automatique du cache.
+- Durcissement de sécurité hors-ligne : assainissement strict du HTML en stockage local sans dépendance externe ni CDN.
+- Invalidation et clôture immédiate des sessions administrateurs lors de la réinitialisation de mot de passe et de l'invitation.
+- Fiabilisation des flux RSS (découpage « Auteur - Titre » et script de réparation rétroactive).
+- Régénération des icônes PWA en haute définition depuis les sources vectorielles SVG.
+- Support du double nommage des archives signées Ed25519.
+- Transfert officiel du dépôt vers l'organisation `YunoHost-Apps`.
+
 ## [1.3.1~ynh19] - 2026-11-07
 - Alignement de l'ID du paquet sur `anarcosyndicalismebook` en conformité avec le nom du dépôt Codeberg `anarcosyndicalismebook_ynh`.
 - Actualisation du mainteneur du paquet (`maintainers = ["AnARCHIS12"]`).
