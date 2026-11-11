@@ -13,7 +13,7 @@ maintainers = ["AnARCHIS12"]
 
 [upstream]
 license = "MIT"
-website = "https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook"
+website = "https://anarcosyndicalismebookcms.unionlibertaireanarchiste.org"
 code = "https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook"
 admindoc = "https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook/src/branch/main/README.md"
 
