@@ -7,7 +7,7 @@ name = "AnarcosyndicalismeBOOK"
 description.en = "Digital library CMS for sharing texts, PDFs and EPUBs"
 description.fr = "CMS de bibliothèque numérique pour partager textes, PDF et EPUB"
 
-version = "1.3.1~ynh20"
+version = "1.3.1~ynh21"
 
 maintainers = ["AnARCHIS12"]
 
@@ -62,12 +62,14 @@ ram.runtime = "128M"
     ask.en = "CAP Site Key (optional)"
     ask.fr = "Clé de site CAP (facultatif)"
     optional = true
+    default = ""
 
     [install.cap_secret_key]
     type = "string"
     ask.en = "CAP Secret Key (optional)"
     ask.fr = "Clé secrète CAP (facultatif)"
     optional = true
+    default = ""
 
     [install.smtp_host]
     type = "string"
@@ -80,26 +82,32 @@ ram.runtime = "128M"
     ask.en = "SMTP Port"
     ask.fr = "Port SMTP"
     default = "25"
+
     [install.contact_email]
     type = "email"
-    ask.en = "Contact Email (recipient)"
-    ask.fr = "Email de contact (destinataire)"
+    ask.en = "Contact Email (recipient - optional)"
+    ask.fr = "Email de contact (destinataire - facultatif)"
     example = "contact@example.com"
-    default = ""
+    optional = true
+
     [install.smtp_user]
     type = "string"
-    ask.en = "SMTP User (email address for sending)"
-    ask.fr = "Utilisateur SMTP (adresse email pour l'envoi)"
+    ask.en = "SMTP User (email address for sending - optional)"
+    ask.fr = "Utilisateur SMTP (adresse email pour l'envoi - facultatif)"
     example = "contact@yourdomain.org"
     help.en = "Email address used to send contact form messages"
     help.fr = "Adresse email utilisée pour envoyer les messages du formulaire de contact"
+    optional = true
+    default = ""
 
     [install.smtp_password]
     type = "password"
-    ask.en = "SMTP Password"
-    ask.fr = "Mot de passe SMTP"
+    ask.en = "SMTP Password (optional)"
+    ask.fr = "Mot de passe SMTP (facultatif)"
     help.en = "Password for the SMTP email account"
     help.fr = "Mot de passe du compte email SMTP"
+    optional = true
+    default = ""
 
 [resources]
     [resources.sources.main]

@@ -4,6 +4,9 @@ test_format = 1.0
 
 [default]
 
-    # ------------
-    # Tests to run
-    # ------------
+    [default.args]
+    contact_email = "admin@example.com"
+    smtp_user = "admin@example.com"
+    smtp_password = "SomeSuperStrongPassword1234"
+    cap_site_key = "test_cap_site_key"
+    cap_secret_key = "test_cap_secret_key"
