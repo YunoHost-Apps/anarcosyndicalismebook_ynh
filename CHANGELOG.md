@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1~ynh21] - 2026-11-12
+- Déclaration explicite des paramètres d'installation facultatifs (`optional = true`) dans `manifest.toml` (`contact_email`, `smtp_user`, `smtp_password`, `cap_site_key`, `cap_secret_key`) éliminant les erreurs de validation Moulinette.
+- Ajout de la suite d'arguments par défaut `[default.args]` dans `tests.toml` pour les tests automatisés de la CI YunoHost.
+- Redirection NGINX en sous-dossier : ajout de la directive `#sub_path_only rewrite ^__PATH__$ __PATH__/ permanent;` dans `conf/nginx.conf` pour éviter les erreurs 404 lors des accès à l'application sans barre oblique finale.
+- Remplacement des directives NGINX `add_header` par `more_set_headers` pour garantir l'application uniforme des en-têtes de sécurité sans masquage par les blocs imbriqués.
+- Validation intégrale de la suite de tests automatisés YunoHost (`package_check`) : 7/7 tests réussis, niveau de qualité global 6 atteint.
+
 ## [1.3.1~ynh20] - 2026-11-09
 - Mise à jour de la source vers la dernière révision LTS stabilisée (`release/v1.3.1-lts`, commit `d5a2bbdd`).
 - Intégration de la détection fine des canaux de mise à jour (LTS et Bêta) avec gestion et purge automatique du cache.
