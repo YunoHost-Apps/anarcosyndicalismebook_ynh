@@ -10,7 +10,7 @@ It shall NOT be edited by hand.
 
 Digital library CMS for sharing texts, PDFs and EPUBs
 
-[![🌐 Official app website](https://img.shields.io/badge/Official_app_website-darkgreen?style=for-the-badge)](https://anarcosyndicalismebookcms.unionlibertaireanarchiste.org)
+[![🌐 Official app website](https://img.shields.io/badge/Official_app_website-darkgreen?style=for-the-badge)](https://codeberg.org/Anarcosyndicalismebook/anarcosyndicalismebook)
 [![Version: 1.3.1~ynh21](https://img.shields.io/badge/Version-1.3.1~ynh21-rgb(18,138,11)?style=for-the-badge)](https://ci-apps.yunohost.org/ci/apps/anarcosyndicalismebook/)
 
 <div align="center">
