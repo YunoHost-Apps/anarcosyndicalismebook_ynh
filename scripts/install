@@ -39,11 +39,8 @@ ynh_script_progression "Installing Composer dependencies..."
 
 # Check if composer.json exists before installing dependencies
 if [[ -f "$install_dir/composer.json" ]]; then
-    ynh_composer_install
-    # Run composer install directly as the app user
-    pushd "$install_dir"
-    sudo -u "$app" php"$php_version" composer.phar install --no-dev --prefer-dist --optimize-autoloader --no-interaction
-    popd
+    # composer.phar is provisioned by the composer resource declared in manifest.toml
+    ynh_composer_exec install --no-dev --prefer-dist --optimize-autoloader
 else
     ynh_print_info "No composer.json found, skipping Composer dependencies installation"
 fi
@@ -52,6 +49,10 @@ fi
 # SYSTEM CONFIGURATION
 #=================================================
 ynh_script_progression "Adding system configurations..."
+
+# Defaults for the auto-generated PHP-FPM pool (admins may override these settings)
+ynh_app_setting_set_default --key=php_upload_max_filesize --value=500M
+ynh_app_setting_set_default --key=php_memory_limit --value=256M
 
 ynh_config_add_phpfpm
 
