@@ -49,6 +49,10 @@ fi
 #=================================================
 ynh_script_progression "Upgrading system configurations..."
 
+# Defaults for the auto-generated PHP-FPM pool (admins may override these settings)
+ynh_app_setting_set_default --key=php_upload_max_filesize --value=500M
+ynh_app_setting_set_default --key=php_memory_limit --value=256M
+
 ynh_config_add_phpfpm
 
 ynh_config_add_nginx
