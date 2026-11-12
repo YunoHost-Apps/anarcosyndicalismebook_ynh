@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.3.1~ynh22] - 2026-11-12
+- Migration de l'installation de Composer vers la ressource `[resources.composer]` (version 2.8.3) du manifeste, conformément au format d'empaquetage 2.1 : suppression de l'utilitaire obsolète `ynh_composer_install` et de la variable `composer_version` dans `scripts/_common.sh`.
+- Exécution des dépendances via `ynh_composer_exec` (utilisateur de l'application, `COMPOSER_HOME` isolé dans le dossier d'installation) dans `scripts/install` et `scripts/upgrade`, ce qui supprime l'avertissement du linter `package_check`.
+
 ## [1.3.1~ynh21] - 2026-11-12
 - Déclaration explicite des paramètres d'installation facultatifs (`optional = true`) dans `manifest.toml` (`contact_email`, `smtp_user`, `smtp_password`, `cap_site_key`, `cap_secret_key`) éliminant les erreurs de validation Moulinette.
 - Ajout de la suite d'arguments par défaut `[default.args]` dans `tests.toml` pour les tests automatisés de la CI YunoHost.

@@ -7,7 +7,7 @@ name = "AnarcosyndicalismeBOOK"
 description.en = "Digital library CMS for sharing texts, PDFs and EPUBs"
 description.fr = "CMS de bibliothèque numérique pour partager textes, PDF et EPUB"
 
-version = "1.3.1~ynh21"
+version = "1.3.1~ynh22"
 
 maintainers = ["AnARCHIS12"]
 
@@ -127,6 +127,9 @@ ram.runtime = "128M"
 
     [resources.apt]
     packages = "git, mariadb-server, php8.4-cli, php8.4-fpm, php8.4-mysql, php8.4-curl, php8.4-mbstring, php8.4-sqlite3, php8.4-xml, php8.4-gd, php8.4-zip, php8.4-intl, php8.4-opcache"
+
+    [resources.composer]
+    version = "2.8.3"
 
     [resources.database]
     type = "mysql"
